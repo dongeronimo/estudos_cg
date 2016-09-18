@@ -77,12 +77,24 @@ void display(void)
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	// Use our shader
 	glUseProgram(myshader.programId);
-	// 1rst attribute buffer : vertices
-	glEnableVertexAttribArray(0);
+	//Eu sei que o nome do atributo dos vértices é vertexPosition_modelspace.
+	//Usando o atributo da geometria.
+	glEnableVertexAttribArray(myshader.attributes["vertexPosition_modelspace"]);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
 	glVertexAttribPointer(
-		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		myshader.attributes["vertexPosition_modelspace"],                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	//Agora é o atributo da cor
+	glEnableVertexAttribArray(myshader.attributes["vertexColor"]);
+	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexcolor);
+	glVertexAttribPointer(
+		myshader.attributes["vertexColor"],                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		4,                  // size
 		GL_FLOAT,           // type
 		GL_FALSE,           // normalized?
 		0,                  // stride
