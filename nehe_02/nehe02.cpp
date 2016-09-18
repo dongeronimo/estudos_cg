@@ -14,8 +14,10 @@ GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_pat
 struct Triangulo
 {
 	GLfloat* vertexBufferData;
+	GLfloat* vertexColorData;
 	GLuint VertexArrayID;
 	GLuint vertexbuffer;
+	GLuint vertexcolor;
 };
 Triangulo tri;
 
@@ -34,15 +36,24 @@ void initResources()
 	};
 	tri.vertexBufferData = new GLfloat[9];
 	memcpy(tri.vertexBufferData, localData, sizeof(localData));
+
+	static const GLfloat localColor[] = {
+		1.0f, 0.0f, 0.0, 1.0f,
+		1.0f, 1.0f, 0.0, 1.0f,
+		1.0f, 1.0f, 1.0, 1.0f,
+	};
+	tri.vertexColorData = new GLfloat[12];
+	memcpy(tri.vertexColorData, localColor, sizeof(localColor));
 	//cria o vertex array object e os buffers dele.
 	glGenVertexArrays(1, &tri.VertexArrayID);
 	glBindVertexArray(tri.VertexArrayID);
 	glGenBuffers(1, &tri.vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, 9*sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexBufferData ), GL_STATIC_DRAW);
-	// Create and compile our GLSL program from the shaders
-	//programID = LoadShaders("C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader", 
-	//	"C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader");
+	glGenBuffers(1, &tri.vertexcolor);
+	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexcolor);
+	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexColorData), GL_STATIC_DRAW);
+
 }
 
 void idle()
