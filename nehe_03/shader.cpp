@@ -25,6 +25,11 @@ std::string ReadShaderFile(std::string path)
 			VertexShaderCode += "\n" + Line;
 		VertexShaderStream.close();
 	}
+	else
+	{
+		std::string err = path + " não encontrado";
+		throw std::exception(err.c_str());
+	}
 	return VertexShaderCode;
 }
 
