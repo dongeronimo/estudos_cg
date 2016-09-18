@@ -5,7 +5,10 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "shader.h"
 using namespace std;
+
+
 GLuint LoadShaders(const char * vertex_file_path, const char * fragment_file_path);
 
 struct Triangulo
@@ -14,36 +17,32 @@ struct Triangulo
 	GLuint VertexArrayID;
 	GLuint vertexbuffer;
 };
-//Triangulo tri;
+Triangulo tri;
 
-//GLfloat vertexBufferData[] = {
-//	-1.0f, -1.0f, 0.0f,
-//	1.0f, -1.0f, 0.0f,
-//	0.0f,  1.0f, 0.0f,
-//};
-GLfloat *vertexBufferData;
-GLuint VertexArrayID;
-GLuint vertexbuffer;
-GLuint programID;
+MyShader myshader;
 
 void initResources()
 {	
+	//Shader
+	myshader = CreateShaderProgram("C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader",
+								   "C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader");
+	//Gambi pra inicializar o buffer
 	static const GLfloat localData[] = {
 		-1.0f, -1.0f, 0.0f,
 		1.0f, -1.0f, 0.0f,
 		0.0f,  1.0f, 0.0f,
 	};
-	vertexBufferData = new GLfloat[9];
-	memcpy(vertexBufferData, localData, sizeof(localData));
-
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, 9*sizeof(GLfloat), const_cast<GLfloat*>( vertexBufferData ), GL_STATIC_DRAW);
+	tri.vertexBufferData = new GLfloat[9];
+	memcpy(tri.vertexBufferData, localData, sizeof(localData));
+	//cria o vertex array object e os buffers dele.
+	glGenVertexArrays(1, &tri.VertexArrayID);
+	glBindVertexArray(tri.VertexArrayID);
+	glGenBuffers(1, &tri.vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, 9*sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexBufferData ), GL_STATIC_DRAW);
 	// Create and compile our GLSL program from the shaders
-	programID = LoadShaders("C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader", 
-		"C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader");
+	//programID = LoadShaders("C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader", 
+	//	"C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader");
 }
 
 void idle()
@@ -64,12 +63,12 @@ void reshape(int w, int h)
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.2, 0.2, 0.2, 1);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	// Use our shader
-	glUseProgram(programID);
+	glUseProgram(myshader.programId);
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
 	glVertexAttribPointer(
 		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
@@ -112,9 +111,9 @@ int main(int argc, char *argv[])
 	glutIdleFunc(idle);
 	glutMainLoop();
 
-	glDeleteBuffers(1, &vertexbuffer);
-	glDeleteVertexArrays(1, &VertexArrayID);
-	glDeleteProgram(programID);
+	glDeleteBuffers(1, &tri.vertexbuffer);
+	glDeleteVertexArrays(1, &tri.VertexArrayID);
+	glDeleteProgram(myshader.programId);
 
 	return EXIT_SUCCESS;
 }
