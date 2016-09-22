@@ -17,8 +17,10 @@ GLfloat screenWidth = 600, screenHeight = 400;
 struct Triangulo
 {
 	GLfloat* vertexBufferData;
+	GLushort* elementBufferData;
 	GLfloat* vertexColorData;
 	GLuint VertexArrayID;
+	GLuint elementBuffer;
 	GLuint vertexbuffer;
 	GLuint vertexcolor;
 };
@@ -28,6 +30,7 @@ MyShader myshader;
 
 void initResources()
 {	
+	glEnable(GL_DEPTH_TEST);
 	//Shader
 	myshader = CreateShaderProgram("C://programacao//comp_grafica//src//nehe_04//vertexShader.vertexshader",
 								   "C://programacao//comp_grafica//src//nehe_04//fragmentShader.fragmentshader");
@@ -35,28 +38,39 @@ void initResources()
 	static const GLfloat localData[] = {
 		-1.0f, -1.0f, 0.0f,
 		1.0f, -1.0f, 0.0f,
-		0.0f,  1.0f, 0.0f,
+		-1.0f,  1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f
 	};
-	tri.vertexBufferData = new GLfloat[9];
+	tri.vertexBufferData = new GLfloat[12];
 	memcpy(tri.vertexBufferData, localData, sizeof(localData));
 
 	static const GLfloat localColor[] = {
 		0.0f, 1.0f, 0.0, 1.0f,
 		1.0f, 1.0f, 0.0, 1.0f,
 		0.0f, 0.0f, 1.0, 1.0f,
+		0.0f, 1.0f, 1.0f, 1.0f
 	};
-	tri.vertexColorData = new GLfloat[12];
+	tri.vertexColorData = new GLfloat[16];
 	memcpy(tri.vertexColorData, localColor, sizeof(localColor));
+
+	static const GLushort localElem[] = {
+		0,1,2,
+		2,1,3
+	};
+	tri.elementBufferData = new GLushort[6];
+	memcpy(tri.elementBufferData, localElem, sizeof(localElem));
 	//cria o vertex array object e os buffers dele.
 	glGenVertexArrays(1, &tri.VertexArrayID);
 	glBindVertexArray(tri.VertexArrayID);
 	glGenBuffers(1, &tri.vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, 9*sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexBufferData ), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 12*sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexBufferData ), GL_STATIC_DRAW);
 	glGenBuffers(1, &tri.vertexcolor);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexcolor);
-	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexColorData), GL_STATIC_DRAW);
-
+	glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexColorData), GL_STATIC_DRAW);
+	glGenBuffers(1, &tri.elementBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tri.elementBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLushort), tri.elementBufferData, GL_STATIC_DRAW);
 }
 
 void idle()
@@ -78,13 +92,13 @@ void reshape(int w, int h)
 
 void display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	// Use our shader
 	glUseProgram(myshader.programId);
 	//A matriz MVP
 	glm::mat4 projection = glm::perspective<GLfloat>(fov, screenWidth / screenHeight, 0.1f, 100.f);
-	glm::mat4 view = glm::lookAt(glm::vec3(10, 0.5, 4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 view = glm::lookAt(glm::vec3(1, 1, -4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 mvp = projection * view * model; // A multiplicação é na ordem inversa do nome.
 	//agora passa pro shader
@@ -112,9 +126,12 @@ void display(void)
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
+	//Agora é a array
+	/* Push each element in buffer_vertices to the vertex shader */
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tri.elementBuffer);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void*)0);
+	//GLenum err = glGetError();
 
-	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 	glDisableVertexAttribArray(0);
 
 	glFlush();
