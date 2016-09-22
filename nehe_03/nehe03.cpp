@@ -84,7 +84,7 @@ void display(void)
 	glUseProgram(myshader.programId);
 	//A matriz MVP
 	glm::mat4 projection = glm::perspective<GLfloat>(fov, screenWidth / screenHeight, 0.1f, 100.f);
-	glm::mat4 view = glm::lookAt(glm::vec3(10, 0.5, 30), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 view = glm::lookAt(glm::vec3(10, 0.5, 4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 mvp = projection * view * model; // A multiplicação é na ordem inversa do nome.
 	//agora passa pro shader
