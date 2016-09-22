@@ -4,3 +4,4 @@ project(EstudosCG)
 
 add_subdirectory(nehe_02)
 add_subdirectory(nehe_03)
+add_subdirectory(nehe_04)
