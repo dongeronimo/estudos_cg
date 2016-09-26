@@ -19,6 +19,7 @@ public:
 	//Cria a partir de um arquivo .obj como os gerados pelo exportador do blender, com
 	//os shaders dados.
 	Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragmentShaderId);
+	~Geometry();
 	void Translate(std::array<float, 3> pos);
 	void Rotate(std::array<float, 9> angles);
 	void Scale(std::array<float, 3> values);

@@ -5,7 +5,11 @@ project(Nehe04b_GeometryFromWavefrontObj)
 
 file(GLOB my_source_files "*.h" "*.cpp")
 add_executable(Nehe04b ${my_source_files} )    
-
+#Find assimp
+set (ASSIMP_INCLUDE_DIR "C:/Program Files (x86)/Assimp/include")
+set (ASSIMP_LIB "C:/Program Files (x86)/Assimp/lib/assimp-vc140-mt.lib")
+target_include_directories(Nehe04b PUBLIC ${ASSIMP_INCLUDE_DIR})
+target_link_libraries(Nehe04b ${ASSIMP_LIB} )
 # Find Glut
 set (GLUT_INCLUDE_DIR "C:/lib2/freeglut/include")
 set (GLUT_LIB "C:/lib2/freeglut/lib/freeglut.lib")
