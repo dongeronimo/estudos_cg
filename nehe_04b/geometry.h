@@ -8,7 +8,13 @@
 class Geometry
 {
 private:
-
+	size_t vertexBufferSize;
+	size_t elementBufferSize;
+	GLuint vertexArrayId;
+	GLuint vertexBufferId;
+	GLuint elementBufferId;
+	GLfloat* vertexBuffer;
+	GLuint* elementBuffer;
 public:
 	//Cria a partir de um arquivo .obj como os gerados pelo exportador do blender, com
 	//os shaders dados.

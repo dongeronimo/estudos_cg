@@ -6,13 +6,17 @@
 #include <fstream>
 #include <vector>
 #include "shader.h"
+#include "geometry.h"
 #include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
+#include <memory>
+
 using namespace std;
 using namespace glm;
 const GLfloat fov = 45.0f;
 GLfloat screenWidth = 600, screenHeight = 400;
 
+shared_ptr<Geometry> geo;
 
 struct Triangulo
 {
@@ -30,11 +34,13 @@ MyShader myshader;
 
 void initResources()
 {	
+	//Flags do opengl
 	glEnable(GL_DEPTH_TEST);
 	//Shader
 	myshader = CreateShaderProgram("C://programacao//comp_grafica//src//nehe_04b//vertexShader.vertexshader",
 								   "C://programacao//comp_grafica//src//nehe_04b//fragmentShader.fragmentshader");
-	//Gambi pra inicializar o buffer
+	geo = make_shared<Geometry>("C://programacao//comp_grafica//src//assets//cubo_correto.obj", myshader.vsId, myshader.fsId);
+	//Objetos
 	static const GLfloat localData[] = {
 		-1.0f, -1.0f, 0.0f,
 		1.0f, -1.0f, 0.0f,
