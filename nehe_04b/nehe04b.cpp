@@ -1,15 +1,15 @@
-#include <GL\glew.h>
-#include <GL\GL.h>
-#include <GL\glut.h>
+#include <glew.h>
+#include <glut.h>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include "shader.h"
 #include "geometry.h"
-#include <glm.hpp>
-#include <gtc\matrix_transform.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <memory>
+#include <cstring>
 
 using namespace std;
 using namespace glm;
@@ -91,7 +91,7 @@ void keyboard(unsigned char key, int x, int y)
 
 void reshape(int w, int h)
 {
-	//A matrix de projeção depende da largura e altura da tela.
+	//A matrix de projeï¿½ï¿½o depende da largura e altura da tela.
 	screenWidth = w;
 	screenHeight = h;
 }
@@ -106,10 +106,10 @@ void display(void)
 	glm::mat4 projection = glm::perspective<GLfloat>(fov, screenWidth / screenHeight, 0.1f, 100.f);
 	glm::mat4 view = glm::lookAt(glm::vec3(1, 1, -4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	glm::mat4 model = glm::mat4(1.0f);
-	glm::mat4 mvp = projection * view * model; // A multiplicação é na ordem inversa do nome.
+	glm::mat4 mvp = projection * view * model; // A multiplicaï¿½ï¿½o ï¿½ na ordem inversa do nome.
 	//agora passa pro shader
 	glUniformMatrix4fv(myshader.uniforms.at("mvp"), 1, GL_FALSE, &mvp[0][0]);
-	//Eu sei que o nome do atributo dos vértices é vertexPosition_modelspace.
+	//Eu sei que o nome do atributo dos vï¿½rtices ï¿½ vertexPosition_modelspace.
 	//Usando o atributo da geometria.
 	glEnableVertexAttribArray(myshader.attributes["vertexPosition_modelspace"]);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
@@ -121,7 +121,7 @@ void display(void)
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
-	//Agora é o atributo da cor
+	//Agora ï¿½ o atributo da cor
 	glEnableVertexAttribArray(myshader.attributes["vertexColor"]);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexcolor);
 	glVertexAttribPointer(
@@ -132,7 +132,7 @@ void display(void)
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
-	//Agora é a array
+	//Agora ï¿½ a array
 	/* Push each element in buffer_vertices to the vertex shader */
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tri.elementBuffer);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void*)0);
@@ -144,7 +144,7 @@ void display(void)
 	glutSwapBuffers();
 }
 
-//Função principal do programa.
+//Funï¿½ï¿½o principal do programa.
 int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
 	{
 		const GLubyte* _err = glewGetErrorString(glError);
 		std::string str((char*)_err);
-		std::cerr << "Erro na inicialização da GLEW:" << str << std::endl;
+		std::cerr << "Erro na inicializaï¿½ï¿½o da GLEW:" << str << std::endl;
 		return EXIT_FAILURE;
 	}
 	initResources();

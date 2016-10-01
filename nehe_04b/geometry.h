@@ -1,8 +1,8 @@
 #ifndef __geometry_h
 #define __geometry_h
 #include <string>
-#include <GL/glew.h>
-#include <GL/GL.h>
+#include <glew.h>
+#include <gl.h>
 #include <array>
 
 class Geometry

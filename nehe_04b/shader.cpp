@@ -27,8 +27,8 @@ std::string ReadShaderFile(std::string path)
 	}
 	else
 	{
-		std::string err = path + " não encontrado";
-		throw std::exception(err.c_str());
+		std::string err = path + " nï¿½o encontrado";
+		throw std::runtime_error(err.c_str());
 	}
 	return VertexShaderCode;
 }
@@ -95,7 +95,7 @@ GLuint MakeShader(GLenum type, std::string source)
 	{
 		string _probl = GetShaderInfoLog(shader, glGetShaderiv, glGetShaderInfoLog);
 		glDeleteShader(shader);
-		throw std::exception(_probl.c_str());
+		throw std::runtime_error(_probl.c_str());
 	}
 	else
 	{
@@ -114,7 +114,7 @@ GLuint MakeProgram(GLuint vertex_shader, GLuint fragment_shader)
 	if (!program_ok) {
 		string _probl = GetShaderInfoLog(program, glGetProgramiv, glGetProgramInfoLog);
 		glDeleteProgram(program);
-		throw std::exception(_probl.c_str());
+		throw std::runtime_error(_probl.c_str());
 	}
 	return program;
 }
