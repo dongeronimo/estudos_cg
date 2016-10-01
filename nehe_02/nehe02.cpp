@@ -1,10 +1,11 @@
-#include <GL\glew.h>
-#include <GL\GL.h>
-#include <GL\glut.h>
+#include <glew.h>
+#include <gl.h>
+#include <glut.h>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string.h>
 #include "shader.h"
 using namespace std;
 
@@ -26,8 +27,8 @@ MyShader myshader;
 void initResources()
 {	
 	//Shader
-	myshader = CreateShaderProgram("C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader",
-								   "C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader");
+	myshader = CreateShaderProgram("//home//geronimo//programacao//estudos_cg//nehe_02//SimpleVertexShader.vertexshader",
+								   "//home//geronimo//programacao//estudos_cg//nehe_02//SimpleFragmentShader.fragmentshader");
 	//Gambi pra inicializar o buffer
 	static const GLfloat localData[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -77,7 +78,7 @@ void display(void)
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	// Use our shader
 	glUseProgram(myshader.programId);
-	//Eu sei que o nome do atributo dos vértices é vertexPosition_modelspace.
+	//Eu sei que o nome do atributo dos vï¿½rtices ï¿½ vertexPosition_modelspace.
 	//Usando o atributo da geometria.
 	glEnableVertexAttribArray(myshader.attributes["vertexPosition_modelspace"]);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
@@ -89,7 +90,7 @@ void display(void)
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
-	//Agora é o atributo da cor
+	//Agora ï¿½ o atributo da cor
 	glEnableVertexAttribArray(myshader.attributes["vertexColor"]);
 	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexcolor);
 	glVertexAttribPointer(
@@ -109,7 +110,7 @@ void display(void)
 	glutSwapBuffers();
 }
 
-//Função principal do programa.
+//Funï¿½ï¿½o principal do programa.
 int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
@@ -123,7 +124,7 @@ int main(int argc, char *argv[])
 	{
 		const GLubyte* _err = glewGetErrorString(glError);
 		std::string str((char*)_err);
-		std::cerr << "Erro na inicialização da GLEW:" << str << std::endl;
+		std::cerr << "Erro na inicializaï¿½ï¿½o da GLEW:" << str << std::endl;
 		return EXIT_FAILURE;
 	}
 	initResources();

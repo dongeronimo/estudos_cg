@@ -1,6 +1,6 @@
 #include "shader.h"
 #include <fstream>
-
+#include <cstdlib>
 MyShader CreateShaderProgram(std::string vsPath, std::string fsPath)
 {
 	MyShader s;
@@ -18,7 +18,7 @@ MyShader CreateShaderProgram(std::string vsPath, std::string fsPath)
 std::string ReadShaderFile(std::string path)
 {
 	std::string VertexShaderCode;
-	std::ifstream VertexShaderStream(path, std::ios::in);
+	std::ifstream VertexShaderStream(path.c_str(), std::ios::in);
 	if (VertexShaderStream.is_open()) {
 		std::string Line = "";
 		while (getline(VertexShaderStream, Line))
@@ -90,7 +90,7 @@ GLuint MakeShader(GLenum type, std::string source)
 	{
 		string _probl = GetShaderInfoLog(shader, glGetShaderiv, glGetShaderInfoLog);
 		glDeleteShader(shader);
-		throw std::exception(_probl.c_str());
+		throw std::runtime_error(_probl.c_str());
 	}
 	else
 	{
@@ -109,7 +109,7 @@ GLuint MakeProgram(GLuint vertex_shader, GLuint fragment_shader)
 	if (!program_ok) {
 		string _probl = GetShaderInfoLog(program, glGetProgramiv, glGetProgramInfoLog);
 		glDeleteProgram(program);
-		throw std::exception(_probl.c_str());
+		throw std::runtime_error(_probl.c_str());
 	}
 	return program;
 }
