@@ -37,9 +37,9 @@ void initResources()
 	//Flags do opengl
 	glEnable(GL_DEPTH_TEST);
 	//Shader
-	myshader = CreateShaderProgram("C://programacao//comp_grafica//src//nehe_04b//vertexShader.vertexshader",
-								   "C://programacao//comp_grafica//src//nehe_04b//fragmentShader.fragmentshader");
-	geo = make_shared<Geometry>("C://programacao//comp_grafica//src//assets//cubo_correto.obj", myshader.vsId, myshader.fsId);
+	myshader = CreateShaderProgram("/home/geronimo/programacao/estudos_cg/nehe_04b/vertexShader.vertexshader",
+								   "/home/geronimo/programacao/estudos_cg/nehe_04b/fragmentShader.fragmentshader");
+	geo = make_shared<Geometry>("/home/geronimo/programacao/estudos_cg/assets/cubo_correto.obj", myshader.vsId, myshader.fsId);
 	//Objetos
 	static const GLfloat localData[] = {
 		-1.0f, -1.0f, 0.0f,
