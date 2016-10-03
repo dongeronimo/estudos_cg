@@ -1,7 +1,12 @@
 #ifndef __shader_h
 #define __shader_h
 #include <glew.h>
+#ifdef WIN32
+#include <gl/gl.h>
+#endif
+#ifdef UNIX
 #include <gl.h>
+#endif
 #include <map>
 #include <string>
 using namespace std;

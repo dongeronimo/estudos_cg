@@ -1,5 +1,10 @@
 #include <glew.h>
-#include <gl.h>
+#ifdef WIN32
+	#include <gl/gl.h>
+#endif
+#ifdef UNIX
+	#include <gl.h>
+#endif
 #include <glut.h>
 #include <string>
 #include <iostream>
@@ -23,12 +28,19 @@ struct Triangulo
 Triangulo tri;
 
 MyShader myshader;
+#ifdef WIN32
+const string vsPath = "C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader";
+const string fsPath = "C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader";
+#endif
+#ifdef UNIX
+const string vsPath = "//home//geronimo//programacao//estudos_cg//nehe_02//SimpleVertexShader.vertexshader";
+const string fsPath = "//home//geronimo//programacao//estudos_cg//nehe_02//SimpleFragmentShader.fragmentshader";
+#endif
 
 void initResources()
 {	
 	//Shader
-	myshader = CreateShaderProgram("//home//geronimo//programacao//estudos_cg//nehe_02//SimpleVertexShader.vertexshader",
-								   "//home//geronimo//programacao//estudos_cg//nehe_02//SimpleFragmentShader.fragmentshader");
+	myshader = CreateShaderProgram(vsPath,fsPath);
 	//Gambi pra inicializar o buffer
 	static const GLfloat localData[] = {
 		-1.0f, -1.0f, 0.0f,
