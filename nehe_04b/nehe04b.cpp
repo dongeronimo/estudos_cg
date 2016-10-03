@@ -37,46 +37,11 @@ void initResources()
 	//Flags do opengl
 	glEnable(GL_DEPTH_TEST);
 	//Shader
-	myshader = CreateShaderProgram("/home/geronimo/programacao/estudos_cg/nehe_04b/vertexShader.vertexshader",
-								   "/home/geronimo/programacao/estudos_cg/nehe_04b/fragmentShader.fragmentshader");
-	geo = make_shared<Geometry>("/home/geronimo/programacao/estudos_cg/assets/cubo_correto.obj", myshader.vsId, myshader.fsId);
-	//Objetos
-	static const GLfloat localData[] = {
-		-1.0f, -1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		-1.0f,  1.0f, 0.0f,
-		1.0f, 1.0f, 0.0f
-	};
-	tri.vertexBufferData = new GLfloat[12];
-	memcpy(tri.vertexBufferData, localData, sizeof(localData));
-
-	static const GLfloat localColor[] = {
-		0.0f, 1.0f, 0.0, 1.0f,
-		1.0f, 1.0f, 0.0, 1.0f,
-		0.0f, 0.0f, 1.0, 1.0f,
-		0.0f, 1.0f, 1.0f, 1.0f
-	};
-	tri.vertexColorData = new GLfloat[16];
-	memcpy(tri.vertexColorData, localColor, sizeof(localColor));
-
-	static const GLushort localElem[] = {
-		0,1,2,
-		2,1,3
-	};
-	tri.elementBufferData = new GLushort[6];
-	memcpy(tri.elementBufferData, localElem, sizeof(localElem));
-	//cria o vertex array object e os buffers dele.
-	glGenVertexArrays(1, &tri.VertexArrayID);
-	glBindVertexArray(tri.VertexArrayID);
-	glGenBuffers(1, &tri.vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, 12*sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexBufferData ), GL_STATIC_DRAW);
-	glGenBuffers(1, &tri.vertexcolor);
-	glBindBuffer(GL_ARRAY_BUFFER, tri.vertexcolor);
-	glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(GLfloat), const_cast<GLfloat*>(tri.vertexColorData), GL_STATIC_DRAW);
-	glGenBuffers(1, &tri.elementBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tri.elementBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(GLushort), tri.elementBufferData, GL_STATIC_DRAW);
+	myshader = CreateShaderProgram("//home//geronimo//programacao//estudos_cg//nehe_04b//vertexShader.vertexshader",
+								   "/home//geronimo//programacao//estudos_cg//nehe_04b//fragmentShader.fragmentshader");
+	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//cubo_correto.obj",
+								myshader.vsId, myshader.fsId);
+	std::cout<<"aqui";
 }
 
 void idle()
@@ -99,7 +64,9 @@ void reshape(int w, int h)
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+	glClearColor(1.0f, 0.2f, 0.2f, 1.0f);
+    geo->Render();
+    /*
 	// Use our shader
 	glUseProgram(myshader.programId);
 	//A matriz MVP
@@ -133,13 +100,12 @@ void display(void)
 		(void*)0            // array buffer offset
 	);
 	//Agora � a array
-	/* Push each element in buffer_vertices to the vertex shader */
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tri.elementBuffer);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void*)0);
 	//GLenum err = glGetError();
 
 	glDisableVertexAttribArray(0);
-
+*/
 	glFlush();
 	glutSwapBuffers();
 }
@@ -151,7 +117,7 @@ int main(int argc, char *argv[])
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(screenWidth, screenHeight);
-	glutCreateWindow("NeHe02 - First Polygons");
+	glutCreateWindow("load");
 	//tenta iniciar a glew
 	GLenum glError = glewInit();
 	if (glError != GLEW_OK)

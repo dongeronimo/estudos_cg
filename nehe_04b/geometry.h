@@ -4,10 +4,11 @@
 #include <glew.h>
 #include <gl.h>
 #include <array>
-
+#include "shader.h"
 class Geometry
 {
 private:
+    MyShader shader;
 	size_t vertexBufferSize;
 	size_t elementBufferSize;
 	GLuint vertexArrayId;
