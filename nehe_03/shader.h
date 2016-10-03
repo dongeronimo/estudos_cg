@@ -1,7 +1,11 @@
 #ifndef __shader_h
 #define __shader_h
 #include <GL/glew.h>
-#include <GL/GL.h>
+#ifdef WIN32
+#include <gl/gl.h>
+#else
+#include <gl.h>
+#endif
 #include <map>
 #include <string>
 using namespace std;
@@ -18,12 +22,12 @@ struct MyShader
 
 
 std::string ReadShaderFile(std::string path);
-//Extrai a lista de atributos e uniformes do programa dado. Os pares nome/localizaçào no shader são retornados
-//nos mapas passados como parâmetro.
+//Extrai a lista de atributos e uniformes do programa dado. Os pares nome/localizaï¿½ï¿½o no shader sï¿½o retornados
+//nos mapas passados como parï¿½metro.
 void introspectProgram(GLuint programId, map<string, GLuint> &attributes, map<string, GLuint> &uniforms);
-//Gera o log do shader. A responsabilidade de deletar a string alocada é do invocador da função.
+//Gera o log do shader. A responsabilidade de deletar a string alocada ï¿½ do invocador da funï¿½ï¿½o.
 string GetShaderInfoLog(GLuint object, PFNGLGETSHADERIVPROC glGet__iv, PFNGLGETSHADERINFOLOGPROC glGet__InfoLog);
-//Cria um shader do tipo dado a partir do código fonte dado.
+//Cria um shader do tipo dado a partir do cï¿½digo fonte dado.
 GLuint MakeShader(GLenum type, std::string source);
 //Cria o programa de shader a partir dos shaders dados.
 GLuint MakeProgram(GLuint vertex_shader, GLuint fragment_shader);

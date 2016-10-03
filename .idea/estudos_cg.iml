@@ -7,45 +7,43 @@
       <sourceFolder url="file://$MODULE_DIR$/nehe_04/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/shader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_03/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/triangulo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/triangulo.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_03/nehe03.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/shader.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_03/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_03/nehe03.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_02/triangulo.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_02/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/triangulo.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_02/triangulo.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/nehe02.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/nehe02.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_02/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/geometry.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/geometry.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/nehe04b.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="Header Search Paths">
         <CLASSES>
-          <root url="file://C:/lib2/freeglut/include" />
-          <root url="file://C:/lib2/glew-2.0.0/include" />
-          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
-          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
-          <root url="file://C:/cygwin64/usr/include" />
-          <root url="file://C:/libs/glm-0.9.7.1/glm" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+          <root url="file://$MODULE_DIR$/../assimp-master/include" />
         </CLASSES>
         <SOURCES>
-          <root url="file://C:/lib2/freeglut/include" />
-          <root url="file://C:/lib2/glew-2.0.0/include" />
-          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
-          <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
-          <root url="file://C:/cygwin64/usr/include" />
-          <root url="file://C:/libs/glm-0.9.7.1/glm" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/5/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+          <root url="file://$MODULE_DIR$/../assimp-master/include" />
         </SOURCES>
       </library>
     </orderEntry>

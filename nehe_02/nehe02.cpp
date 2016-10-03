@@ -1,8 +1,7 @@
 #include <glew.h>
 #ifdef WIN32
 	#include <gl/gl.h>
-#endif
-#ifdef UNIX
+#else
 	#include <gl.h>
 #endif
 #include <glut.h>
@@ -31,8 +30,7 @@ MyShader myshader;
 #ifdef WIN32
 const string vsPath = "C://programacao//comp_grafica//src//nehe_02//SimpleVertexShader.vertexshader";
 const string fsPath = "C://programacao//comp_grafica//src//nehe_02//SimpleFragmentShader.fragmentshader";
-#endif
-#ifdef UNIX
+#else
 const string vsPath = "//home//geronimo//programacao//estudos_cg//nehe_02//SimpleVertexShader.vertexshader";
 const string fsPath = "//home//geronimo//programacao//estudos_cg//nehe_02//SimpleFragmentShader.fragmentshader";
 #endif

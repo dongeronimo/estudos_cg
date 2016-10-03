@@ -3,8 +3,7 @@
 #include <glew.h>
 #ifdef WIN32
 #include <gl/gl.h>
-#endif
-#ifdef UNIX
+#else
 #include <gl.h>
 #endif
 #include <map>
