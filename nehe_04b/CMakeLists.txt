@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 project(nehe_04b)
 
 
 file(GLOB my_source_files "*.h" "*.cpp")
-add_executable(nehe_04b utils.h geometry.h geometry.cpp nehe04b.cpp shader.h shader.cpp )
+add_executable(nehe_04b utils.h geometry.h geometry.cpp nehe04b.cpp shader.h shader.cpp camera.cpp camera.h)
 if(${WIN32})
     # Find Glut
     set (GLUT_INCLUDE_DIR "C:/lib2/freeglut/include")

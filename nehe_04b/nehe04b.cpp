@@ -10,14 +10,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
 #include <cstring>
-
+#include "camera.h"
 using namespace std;
 using namespace glm;
 const GLfloat fov = 45.0f;
 GLfloat screenWidth = 600, screenHeight = 400;
 
 shared_ptr<Geometry> geo;
-
+unique_ptr<camera> cam;
 struct Triangulo
 {
 	GLfloat* vertexBufferData;
@@ -41,7 +41,7 @@ void initResources()
 								   "/home//geronimo//programacao//estudos_cg//nehe_04b//fragmentShader.fragmentshader");
 	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//cubo_correto.obj",
 								myshader.vsId, myshader.fsId);
-	std::cout<<"aqui";
+    cam = std::make_unique<camera>();//make_unique<camera>();
 }
 
 void idle()

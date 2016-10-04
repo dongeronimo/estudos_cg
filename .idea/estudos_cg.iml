@@ -21,12 +21,14 @@
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/geometry.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/camera.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/geometry.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/nehe04b.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/geometry.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04b/camera.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
