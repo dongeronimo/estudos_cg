@@ -39,9 +39,12 @@ void initResources()
 	//Shader
 	myshader = CreateShaderProgram("//home//geronimo//programacao//estudos_cg//nehe_04b//vertexShader.vertexshader",
 								   "/home//geronimo//programacao//estudos_cg//nehe_04b//fragmentShader.fragmentshader");
-	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//cubo_correto.obj",
+	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//sphere.obj",
 								myshader.vsId, myshader.fsId);
-    cam = std::make_unique<camera>();//make_unique<camera>();
+    cam = std::make_unique<camera>();
+    cam->setEyePosition(0, 10, -10);
+	cam->setFocusPosition(0,0,0);
+	cam->setViewUp(0,1,0);
 }
 
 void idle()
@@ -51,7 +54,18 @@ void idle()
 
 void keyboard(unsigned char key, int x, int y)
 {
-
+	if(key == 'a')
+	{
+		glm::vec3 p = cam->getFocusPosition();
+		p[2] = p[2]+1;
+		cam->setFocusPosition(p[0], p[1], p[2]);
+	}
+	if(key == 'd')
+	{
+		glm::vec3 p = cam->getFocusPosition();
+		p[2] = p[2]-1;
+		cam->setFocusPosition(p[0], p[1], p[2]);
+	}
 }
 
 void reshape(int w, int h)
@@ -65,7 +79,7 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0f, 0.2f, 0.2f, 1.0f);
-    geo->Render();
+    geo->Render(cam->getViewProjectionMatrix());
     /*
 	// Use our shader
 	glUseProgram(myshader.programId);

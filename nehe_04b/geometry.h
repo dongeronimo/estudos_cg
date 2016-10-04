@@ -4,6 +4,8 @@
 #include <glew.h>
 #include <gl.h>
 #include <array>
+#include <glm/detail/type_mat.hpp>
+#include <glm/detail/type_mat4x4.hpp>
 #include "shader.h"
 class Geometry
 {
@@ -24,6 +26,6 @@ public:
 	void Translate(std::array<float, 3> pos);
 	void Rotate(std::array<float, 9> angles);
 	void Scale(std::array<float, 3> values);
-	void Render();
+	void Render(glm::mat4 viewProjection);
 };
 #endif

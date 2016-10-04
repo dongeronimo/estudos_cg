@@ -26,8 +26,20 @@ void camera::setViewUp(float x, float y, float z) {
     this->upVector = glm::vec3(x,y,z);
 }
 
-glm::mat4 camera::getViewPerspectiveMatrix() {
+glm::mat4 camera::getViewProjectionMatrix() {
     view = glm::lookAt(eyePosition, focusPosition, upVector);
     glm::mat4 vp = projection * view;
     return vp;
+}
+
+glm::vec3 camera::getEyePosition() {
+    return eyePosition;
+}
+
+glm::vec3 camera::getFocusPosition() {
+    return focusPosition;
+}
+
+glm::vec3 camera::getViewUp() {
+    return upVector;
 }
