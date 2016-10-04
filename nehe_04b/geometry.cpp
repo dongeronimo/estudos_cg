@@ -91,7 +91,7 @@ void Geometry::Render()
     //Nessa versão o calculo da matriz é tôdo aqui, no futuro será parte numa
     //classe de camera.
     glm::mat4 projection = glm::perspective<GLfloat>(45, 1, 0.1f, 100.f);
-    glm::mat4 view = glm::lookAt(glm::vec3(1, 10, -40), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    glm::mat4 view = glm::lookAt(glm::vec3(1, 10, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 mvp = projection * view * model; //A multiplicação é na ordem inversa do nome.
 	glUniformMatrix4fv(shader.uniforms.at("mvp"), 1, GL_FALSE, &mvp[0][0]);
