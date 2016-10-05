@@ -3,7 +3,6 @@
 #ifdef WIN32
 #include <gl/gl.h>
 #else
-#include <gl.h>
 #endif
 #include <string>
 #include <iostream>

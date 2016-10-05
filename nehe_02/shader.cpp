@@ -1,6 +1,6 @@
 #include "shader.h"
 #include <fstream>
-#include <cstdlib>
+
 MyShader CreateShaderProgram(std::string vsPath, std::string fsPath)
 {
 	MyShader s;

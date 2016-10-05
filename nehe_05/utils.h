@@ -7,7 +7,6 @@ using namespace std;
 vector<string> SplitString(const std::string str, const std::string regExpr)
 {
 	std::regex rgx(regExpr);
-	regex_token_iterator<std::string::iterator> sregex_token_iterator;
 	std::sregex_token_iterator iter(str.begin(), str.end(), rgx, -1);
 	std::sregex_token_iterator end;
 	std::vector<string> pedacos;

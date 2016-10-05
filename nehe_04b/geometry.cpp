@@ -1,9 +1,6 @@
 #include "geometry.h"
 #include <fstream>	
-#include <exception>
-#include <string>
-#include <vector>
-#include <array>
+
 #include <regex>
 #include <iostream>
 

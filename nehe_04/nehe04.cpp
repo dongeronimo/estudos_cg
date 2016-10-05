@@ -1,5 +1,4 @@
 #include <glew.h>
-#include <gl.h>
 #include <glut.h>
 #include <string>
 #include <iostream>

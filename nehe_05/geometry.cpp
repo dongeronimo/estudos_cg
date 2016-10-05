@@ -1,18 +1,14 @@
 #include "geometry.h"
 #include <fstream>	
-#include <exception>
-#include <string>
 #include <vector>
-#include <array>
 #include <regex>
 #include <iostream>
 
 #include <assimp/Importer.hpp>      // C++ importer interface
 #include <assimp/scene.h>           // Output data structure
 #include <assimp/postprocess.h>     // Post processing flags
-#include <glm/detail/type_mat.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <iostream>
+
 using namespace std;
 Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragmentShaderId)
 {
