@@ -2,22 +2,18 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04/shader.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04/nehe04.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04/shader.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_04/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/triangulo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/triangulo.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_03/nehe03.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/triangulo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/triangulo.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/nehe_02/nehe02.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/nehe02.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_02/nehe02.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.cpp" isTestSource="false" />
@@ -29,6 +25,19 @@
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/geometry.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/camera.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/shader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/camera.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/geometry.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/nehe05.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/geometry.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/shader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/camera.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04/shader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04/nehe04.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04/shader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_04/CMakeLists.txt" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
