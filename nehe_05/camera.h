@@ -25,9 +25,7 @@ public:
     void setViewUp(float x, float y, float z);
     glm::vec3 getViewUp();
     glm::mat4 getViewProjectionMatrix();
-
-//    glm::mat4 projection = glm::perspective<GLfloat>(45, 1, 0.1f, 100.f);
-//    glm::mat4 view = glm::lookAt(glm::vec3(1, 10, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+//TODO: Tamanho da tela como input.
 };
 
 

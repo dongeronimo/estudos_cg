@@ -13,11 +13,8 @@ using namespace std;
 Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragmentShaderId)
 {
     // Bota o shader.
-    this->shader.vsId = vertexShaderId;
-    this->shader.fsId = fragmentShaderId;
-    this->shader.programId = MakeProgram(this->shader.vsId, this->shader.fsId);
-    introspectProgram(this->shader.programId, this->shader.attributes, this->shader.uniforms);
-    // Pega o objeto 3d.
+	SetShader(vertexShaderId, fragmentShaderId);
+	// Pega o objeto 3d.
 	Assimp::Importer importer;
     cout<<objFilePath<<endl;
 	const aiScene* scene = importer.ReadFile(objFilePath, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
@@ -32,7 +29,7 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	glGenVertexArrays(1, &vertexArrayId);
 	glBindVertexArray(vertexArrayId);
 	//Cria o buffer de indices
-    elementBufferSize = 3 * numFaces * sizeof(GLuint);
+	elementBufferSize = 3 * numFaces * sizeof(GLuint);
 	elementBuffer = new GLuint[3 * numFaces];
 	for (int i = 0; i < numFaces; i++)
 	{
@@ -45,7 +42,7 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferId);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * numFaces * sizeof(GLuint), elementBuffer, GL_STATIC_DRAW);
 	//Cria o buffer de vertices
-    vertexBufferSize = 3 * numVerts * sizeof(GLfloat);
+	vertexBufferSize = 3 * numVerts * sizeof(GLfloat);
 	vertexBuffer = new GLfloat[3 * numVerts];
 	for (int i = 0; i < numVerts; i++)
 	{
@@ -59,6 +56,14 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	//Pronto.
 	glBindVertexArray(0);
 }
+
+void Geometry::SetShader(GLuint vertexShaderId, GLuint fragmentShaderId){
+	shader.vsId = vertexShaderId;
+	shader.fsId = fragmentShaderId;
+	shader.programId = MakeProgram(shader.vsId, shader.fsId);
+	introspectProgram(shader.programId, shader.attributes, shader.uniforms);
+}
+
 Geometry::~Geometry()
 {
 	glDeleteVertexArrays(1, &vertexArrayId);
@@ -69,25 +74,23 @@ Geometry::~Geometry()
 }
 void Geometry::Translate(std::array<float, 3> pos)
 {
+	//TODO: Implementar
 }
 
 void Geometry::Rotate(std::array<float, 9> angles)
 {
+	//TODO: Implementar
 }
 
 void Geometry::Scale(std::array<float, 3> values)
 {
+	//TODO: Implementar
 }
 
 void Geometry::Render(glm::mat4 viewProjection)
 {
 	//Ativa o shader
     glUseProgram(shader.programId);
-    //Passa os dados pro shader
-    //Nessa versão o calculo da matriz é tôdo aqui, no futuro será parte numa
-    //classe de camera.
-//    glm::mat4 projection = glm::perspective<GLfloat>(45, 1, 0.1f, 100.f);
-//    glm::mat4 view = glm::lookAt(glm::vec3(1, 10, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 mvp = viewProjection * model; //A multiplicação é na ordem inversa do nome.
 	glUniformMatrix4fv(shader.uniforms.at("mvp"), 1, GL_FALSE, &mvp[0][0]);
@@ -111,4 +114,76 @@ void Geometry::Render(glm::mat4 viewProjection)
     cout<<err<<endl;
     //Renderiza
     //Limpa
+}
+
+Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
+	SetShader(vertexShaderId, fragmentShaderId);
+	//cria um cubo.
+	GLfloat cube_vertices[] = {
+			// front
+			-1.0, -1.0,  1.0,
+			1.0, -1.0,  1.0,
+			1.0,  1.0,  1.0,
+			-1.0,  1.0,  1.0,
+			// back
+			-1.0, -1.0, -1.0,
+			1.0, -1.0, -1.0,
+			1.0,  1.0, -1.0,
+			-1.0,  1.0, -1.0,
+	};
+	GLfloat cube_colors[] = {
+			// front colors
+			1.0, 0.0, 0.0,
+			0.0, 1.0, 0.0,
+			0.0, 0.0, 1.0,
+			1.0, 1.0, 1.0,
+			// back colors
+			1.0, 0.0, 0.0,
+			0.0, 1.0, 0.0,
+			0.0, 0.0, 1.0,
+			1.0, 1.0, 1.0,
+	};
+	GLuint cube_elements[] = {
+			// front
+			0, 1, 2,
+			2, 3, 0,
+			// top
+			1, 5, 6,
+			6, 2, 1,
+			// back
+			7, 6, 5,
+			5, 4, 7,
+			// bottom
+			4, 0, 3,
+			3, 7, 4,
+			// left
+			4, 5, 1,
+			1, 0, 4,
+			// right
+			3, 2, 6,
+			6, 7, 3,
+	};
+	//Numero de faces
+	const unsigned int numFaces = sizeof(cube_elements)/3;
+	//Numero de vertices
+	const unsigned int numVerts = sizeof(cube_vertices)/3;
+	//Cria o VAO
+	glGenVertexArrays(1, &vertexArrayId);
+	glBindVertexArray(vertexArrayId);
+	//Cria o buffer de indices
+	elementBufferSize = 3 * numFaces * sizeof(GLuint);
+	elementBuffer = new GLuint[3 * numFaces];
+	memcpy(elementBuffer, cube_elements, sizeof(cube_elements));
+	glGenBuffers(1, &elementBufferId);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferId);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * numFaces * sizeof(GLuint), elementBuffer, GL_STATIC_DRAW);
+	//Cria o buffer de vertices
+	vertexBufferSize = 3 * numVerts * sizeof(GLfloat);
+	vertexBuffer = new GLfloat[3 * numVerts];
+	memcpy(vertexBuffer, cube_vertices, sizeof(cube_vertices));
+	glGenBuffers(1, &vertexBufferId);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId);
+	glBufferData(GL_ARRAY_BUFFER, numVerts * 3 * sizeof(GLfloat), const_cast<GLfloat*>(vertexBuffer), GL_STATIC_DRAW);
+	//Pronto.
+	glBindVertexArray(0);
 }

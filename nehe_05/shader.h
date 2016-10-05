@@ -8,6 +8,7 @@ using namespace std;
 
 struct MyShader
 {
+//TODO: Transformar em classe
 	GLuint programId;
 	GLuint vsId;
 	GLuint fsId;
