@@ -12,12 +12,13 @@ class Geometry
 private:
     MyShader shader;
 	size_t vertexBufferSize;
-	size_t elementBufferSize;
 	GLuint vertexArrayId;
 	GLuint vertexBufferId;
 	GLuint elementBufferId;
 	GLfloat* vertexBuffer;
 	GLuint* elementBuffer;
+    GLfloat* textureCoordinateBuffer;
+	GLuint textureCoordinateId;
 	void SetShader(GLuint vertexShaderId, GLuint fragmentShaderId) ;
 public:
 	//Cria a geometria manualmente, pra experiências, pra que eu não tenha que me

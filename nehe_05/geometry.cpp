@@ -29,7 +29,6 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	glGenVertexArrays(1, &vertexArrayId);
 	glBindVertexArray(vertexArrayId);
 	//Cria o buffer de indices
-	elementBufferSize = 3 * numFaces * sizeof(GLuint);
 	elementBuffer = new GLuint[3 * numFaces];
 	for (int i = 0; i < numFaces; i++)
 	{
@@ -171,7 +170,6 @@ Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
 	glGenVertexArrays(1, &vertexArrayId);
 	glBindVertexArray(vertexArrayId);
 	//Cria o buffer de indices
-	elementBufferSize = 3 * numFaces * sizeof(GLuint);
 	elementBuffer = new GLuint[3 * numFaces];
 	memcpy(elementBuffer, cube_elements, sizeof(cube_elements));
 	glGenBuffers(1, &elementBufferId);

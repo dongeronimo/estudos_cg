@@ -1,6 +1,6 @@
 # Blender v2.76 (sub 0) OBJ File: 'cubo_com_tex.blend'
 # www.blender.org
-mtllib sphere.mtl
+mtllib cubo_com_tex.mtl
 o Cube
 v 1.000000 -1.000000 -1.000000
 v 1.000000 -1.000000 1.000000

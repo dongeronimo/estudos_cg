@@ -45,9 +45,9 @@ void initResources()
 	//Shader
 	myshader = CreateShaderProgram("//home//geronimo//programacao//estudos_cg//nehe_05//vertexShader.vertexshader",
 								   "/home//geronimo//programacao//estudos_cg//nehe_05//fragmentShader.fragmentshader");
-//	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//sphere.obj",
-//								myshader.vsId, myshader.fsId);
-	geo = make_shared<Geometry>(myshader.vsId, myshader.fsId);
+	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//cubo_com_tex.obj",
+								myshader.vsId, myshader.fsId);
+//	geo = make_shared<Geometry>(myshader.vsId, myshader.fsId);
     cam = std::make_unique<camera>();
     cam->setEyePosition(0, 10, -10);
 	cam->setFocusPosition(0,0,0);
