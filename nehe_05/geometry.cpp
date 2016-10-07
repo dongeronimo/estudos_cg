@@ -104,7 +104,17 @@ void Geometry::Render(glm::mat4 viewProjection)
 		0,                  // stride
 		(void*)0            // array buffer offset
 	);
-
+	//as texturas
+	glEnableVertexAttribArray(shader.attributes["textureCoord"]);
+    glBindBuffer(GL_ARRAY_BUFFER, textureCoordinateId);
+	glVertexAttribPointer(
+			shader.attributes["textureCoord"], // attribute
+			2,                  // number of elements per vertex, here (x,y)
+			GL_FLOAT,           // the type of each element
+			GL_FALSE,           // take our values as-is
+			0,                  // no extra data between each position
+			0                   // offset of first element
+	);
     //Agora é a array de elementos
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferId);
     const int numElements = vertexBufferSize / sizeof(GLfloat);
@@ -129,6 +139,12 @@ Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
 			1.0, -1.0, -1.0,
 			1.0,  1.0, -1.0,
 			-1.0,  1.0, -1.0,
+	};
+	GLfloat cube_tc[]= {
+		0.0, 0.0,
+		1.0, 0.0,
+		1.0, 1.0,
+		0.0, 1.0,
 	};
 	GLfloat cube_colors[] = {
 			// front colors
@@ -166,6 +182,8 @@ Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
 	const unsigned int numFaces = sizeof(cube_elements)/3;
 	//Numero de vertices
 	const unsigned int numVerts = sizeof(cube_vertices)/3;
+	//Numero de TCs
+	const unsigned int numTc = sizeof(cube_tc)/2;
 	//Cria o VAO
 	glGenVertexArrays(1, &vertexArrayId);
 	glBindVertexArray(vertexArrayId);
@@ -182,6 +200,13 @@ Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
 	glGenBuffers(1, &vertexBufferId);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId);
 	glBufferData(GL_ARRAY_BUFFER, numVerts * 3 * sizeof(GLfloat), const_cast<GLfloat*>(vertexBuffer), GL_STATIC_DRAW);
+	//cria o buffer de textura
+	glGenBuffers(1, &textureCoordinateId);
+	glBindBuffer(GL_ARRAY_BUFFER, textureCoordinateId);
+	textureCoordinateBuffer = new GLfloat[2 * numTc];
+	memcpy(textureCoordinateBuffer, cube_tc, sizeof(cube_tc));
+    glBufferData(GL_ARRAY_BUFFER, numTc * 2 * sizeof(GLfloat), const_cast<GLfloat*>(textureCoordinateBuffer),GL_STATIC_DRAW);
+
 	//Pronto.
 	glBindVertexArray(0);
 }
