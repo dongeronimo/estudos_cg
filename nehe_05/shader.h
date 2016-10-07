@@ -1,7 +1,7 @@
 #ifndef __shader_h
 #define __shader_h
 #include <glew.h>
-#include <gl.h>
+//#include <gl.h>
 #include <map>
 #include <string>
 using namespace std;

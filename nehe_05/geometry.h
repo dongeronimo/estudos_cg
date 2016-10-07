@@ -2,7 +2,7 @@
 #define __geometry_h
 #include <string>
 #include <glew.h>
-#include <gl.h>
+//#include <gl.h>
 #include <array>
 #include <glm/detail/type_mat.hpp>
 #include <glm/detail/type_mat4x4.hpp>

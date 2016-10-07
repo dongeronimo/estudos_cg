@@ -32,14 +32,23 @@ Triangulo tri;
 
 MyShader myshader;
 
+#ifdef WIN32
+const std::string vsPath = "C:\\programacao\\comp_grafica\\src\\nehe_04b\\vertexShader.vertexshader";
+const std::string fsPath = "C:\\programacao\\comp_grafica\\src\\nehe_04b\\fragmentShader.fragmentshader";
+const std::string objPath = "C:\\programacao\\comp_grafica\\src\\assets\\sphere.obj";
+#endif
+#ifdef UNIX
+const std::string vsPath = "//home//geronimo//programacao//estudos_cg//nehe_04b//vertexShader.vertexshader";
+const std::string fsPath = "/home//geronimo//programacao//estudos_cg//nehe_04b//fragmentShader.fragmentshader";
+const std::string objPath = "//home//geronimo//programacao//estudos_cg//assets//sphere.obj";
+#endif
 void initResources()
 {	
 	//Flags do opengl
 	glEnable(GL_DEPTH_TEST);
 	//Shader
-	myshader = CreateShaderProgram("//home//geronimo//programacao//estudos_cg//nehe_04b//vertexShader.vertexshader",
-								   "/home//geronimo//programacao//estudos_cg//nehe_04b//fragmentShader.fragmentshader");
-	geo = make_shared<Geometry>("//home//geronimo//programacao//estudos_cg//assets//sphere.obj",
+	myshader = CreateShaderProgram(vsPath, fsPath);
+	geo = make_shared<Geometry>(objPath,
 								myshader.vsId, myshader.fsId);
     cam = std::make_unique<camera>();
     cam->setEyePosition(0, 10, -10);
