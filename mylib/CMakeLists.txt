@@ -4,7 +4,10 @@ project(MyLib)
 file(GLOB my_source_files "*.h" "*.cpp")
 add_library (mylib ${my_source_files} ) 
 
-
+# Expose B's public includes (including Boost transitively) to other
+# subprojects through cache variable.
+set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}
+    CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
 if(${WIN32})
     # Find Glut
     set (GLUT_INCLUDE_DIR "C:/lib2/freeglut/include/GL")
@@ -58,8 +61,5 @@ if(${UNIX})
 	target_link_libraries(mylib ${LIBPNG_LIB})
 endif(${UNIX})
 
-# Expose B's public includes (including Boost transitively) to other
-# subprojects through cache variable.
-set(${PROJECT_NAME}_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}
-    CACHE INTERNAL "${PROJECT_NAME}: Include Directories" FORCE)
+
 	

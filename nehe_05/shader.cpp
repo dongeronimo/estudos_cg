@@ -39,7 +39,7 @@ void introspectProgram(GLuint programId, map<string, GLuint> &attributes, map<st
 	glGetProgramiv(programId, GL_ACTIVE_ATTRIBUTES, &numberOfAttributes);
 	glGetProgramiv(programId, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &largestAttributeName);
 	//para cada atributo, pegar as propriedades e guardar.
-	for (GLuint i = 0; i < numberOfAttributes; i++)
+	for (GLint i = 0; i < numberOfAttributes; i++)
 	{
 		char* nameBuffer = new char[largestAttributeName];
 		GLsizei length;
@@ -56,7 +56,7 @@ void introspectProgram(GLuint programId, map<string, GLuint> &attributes, map<st
 	glGetProgramiv(programId, GL_ACTIVE_UNIFORMS, &numberOfUniforms);
 	glGetProgramiv(programId, GL_ACTIVE_UNIFORM_MAX_LENGTH, &largesUniformName);
 	//para cada atributo, pegar as propriedades e guardar.
-	for (GLuint i = 0; i < numberOfUniforms; i++)
+	for (GLint i = 0; i < numberOfUniforms; i++)
 	{
 		char* buffer = new char[largesUniformName];
 		GLsizei length;

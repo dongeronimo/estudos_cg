@@ -28,6 +28,7 @@
 #include <memory>
 #include <cstring>
 #include "camera.h"
+
 using namespace std;
 using namespace glm;
 const GLfloat fov = 45.0f;
@@ -38,8 +39,8 @@ unique_ptr<camera> cam;
 
 MyShader myshader;
 #ifdef WIN32
-const std::string vsPath = "C:\\programacao\\comp_grafica\\src\\nehe_04b\\vertexShader.vertexshader";
-const std::string fsPath = "C:\\programacao\\comp_grafica\\src\\nehe_04b\\fragmentShader.fragmentshader";
+const std::string vsPath = "C:\\programacao\\comp_grafica\\src\\nehe_05\\vertexShader.vertexshader";
+const std::string fsPath = "C:\\programacao\\comp_grafica\\src\\nehe_05\\fragmentShader.fragmentshader";
 const std::string objPath = "C:\\programacao\\comp_grafica\\src\\assets\\cubinho.obj";
 #endif
 #ifdef UNIX
@@ -88,8 +89,8 @@ void keyboard(unsigned char key, int x, int y)
 void reshape(int w, int h)
 {
 	//A matrix de proje��o depende da largura e altura da tela.
-	screenWidth = w;
-	screenHeight = h;
+	screenWidth = static_cast<GLfloat>(w);
+	screenHeight = static_cast<GLfloat>(h);
 }
 
 void display(void)
@@ -107,7 +108,7 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(0, 0);
-	glutInitWindowSize(screenWidth, screenHeight);
+	glutInitWindowSize(static_cast<int>(screenWidth), static_cast<int>(screenHeight));
 	glutCreateWindow("texture");
 	//tenta iniciar a glew
 	GLenum glError = glewInit();

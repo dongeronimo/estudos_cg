@@ -6,7 +6,7 @@ void shader::Shader::Introspect()
 	glGetProgramiv(programId, GL_ACTIVE_ATTRIBUTES, &numberOfAttributes);
 	glGetProgramiv(programId, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &largestAttributeName);
 	//para cada atributo, pegar as propriedades e guardar.
-	for (GLuint i = 0; i < numberOfAttributes; i++)
+	for (GLint i = 0; i < numberOfAttributes; i++)
 	{
 		char* nameBuffer = new char[largestAttributeName];
 		GLsizei length;
@@ -23,7 +23,7 @@ void shader::Shader::Introspect()
 	glGetProgramiv(programId, GL_ACTIVE_UNIFORMS, &numberOfUniforms);
 	glGetProgramiv(programId, GL_ACTIVE_UNIFORM_MAX_LENGTH, &largesUniformName);
 	//para cada atributo, pegar as propriedades e guardar.
-	for (GLuint i = 0; i < numberOfUniforms; i++)
+	for (GLint i = 0; i < numberOfUniforms; i++)
 	{
 		char* buffer = new char[largesUniformName];
 		GLsizei length;
@@ -87,6 +87,16 @@ GLuint shader::Shader::MakeProgram(GLuint vertex_shader, GLuint fragment_shader)
 	return program;
 }
 
+GLuint shader::Shader::GetUniform(std::string nome)
+{
+	return uniforms.at(nome);
+}
+
+GLuint shader::Shader::GetAttribute(std::string nome)
+{
+	return atributos.at(nome);
+}
+
 shader::Shader::Shader(std::string vsCode, std::string fsCode)
 {
 	vertexShaderId = MakeShader(GL_VERTEX_SHADER, vsCode);
@@ -108,4 +118,14 @@ shader::Shader::~Shader()
 	glDeleteShader(vertexShaderId);
 	glDeleteShader(fragmentShaderId);
 	glDeleteProgram(programId);
+}
+
+void shader::Shader::StartUsing()
+{
+	glUseProgram(this->programId);
+}
+
+void shader::Shader::StopUsing()
+{
+	glUseProgram(0);
 }

@@ -6,13 +6,13 @@
 #include <array>
 #include <glm/detail/type_mat.hpp>
 #include <glm/detail/type_mat4x4.hpp>
-#include "shader.h"
+#include <Shader.h>
 #include <vector>
-
 class Geometry
 {
 private:
-    MyShader shader;
+	shader::Shader *shaderProgram;
+    //shader::Shader 
 	size_t vertexBufferSize;
 	GLuint vertexArrayId;
 	GLuint vertexBufferId;

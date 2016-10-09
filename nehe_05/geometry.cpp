@@ -1,4 +1,4 @@
-#include "geometry.h"
+﻿#include "geometry.h"
 #include <fstream>	
 #include <vector>
 #include <regex>
@@ -18,7 +18,7 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	Assimp::Importer importer;
     cout<<objFilePath<<endl;
 	const aiScene* scene = importer.ReadFile(objFilePath, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices);
-	if (!scene) assert("n�o conseguiu carregar o .Obj" && false);
+	if (!scene) assert("nao conseguiu carregar o .Obj" && false);
 	//Numero de faces
 	const unsigned int numFaces = scene->mMeshes[0]->mNumFaces;
 	aiFace* faces = scene->mMeshes[0]->mFaces;
@@ -30,7 +30,7 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	glBindVertexArray(vertexArrayId);
 	//Cria o buffer de indices
 	elementBuffer = new GLuint[3 * numFaces];
-	for (int i = 0; i < numFaces; i++)
+	for (unsigned int i = 0; i < numFaces; i++)
 	{
 		if (faces[i].mNumIndices != 3) assert("Todas as faces tem que ser triangulos" && false);
 		elementBuffer[i * 3] = faces[i].mIndices[0];
@@ -43,7 +43,7 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 	//Cria o buffer de vertices
 	vertexBufferSize = 3 * numVerts * sizeof(GLfloat);
 	vertexBuffer = new GLfloat[3 * numVerts];
-	for (int i = 0; i < numVerts; i++)
+	for (unsigned int i = 0; i < numVerts; i++)
 	{
 		vertexBuffer[i * 3] = verts[i][0];
 		vertexBuffer[i * 3 + 1] = verts[i][0 + 1];
@@ -57,10 +57,7 @@ Geometry::Geometry(std::string objFilePath, GLuint vertexShaderId, GLuint fragme
 }
 
 void Geometry::SetShader(GLuint vertexShaderId, GLuint fragmentShaderId){
-	shader.vsId = vertexShaderId;
-	shader.fsId = fragmentShaderId;
-	shader.programId = MakeProgram(shader.vsId, shader.fsId);
-	introspectProgram(shader.programId, shader.attributes, shader.uniforms);
+	shaderProgram = new shader::Shader(vertexShaderId, fragmentShaderId);
 }
 
 Geometry::~Geometry()
@@ -89,15 +86,15 @@ void Geometry::Scale(std::array<float, 3> values)
 void Geometry::Render(glm::mat4 viewProjection)
 {
 	//Ativa o shader
-    glUseProgram(shader.programId);
+	shaderProgram->StartUsing();
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 mvp = viewProjection * model; //A multiplicação é na ordem inversa do nome.
-	glUniformMatrix4fv(shader.uniforms.at("mvp"), 1, GL_FALSE, &mvp[0][0]);
+	glUniformMatrix4fv(shaderProgram->GetUniform("mvp"), 1, GL_FALSE, &mvp[0][0]);
     //Passa os buffers pro shader
-    glEnableVertexAttribArray(shader.attributes["vertexPosition_modelspace"]);
+    glEnableVertexAttribArray(shaderProgram->GetAttribute("vertexPosition_modelspace"));
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId);
 	glVertexAttribPointer(
-		shader.attributes["vertexPosition_modelspace"],                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		shaderProgram->GetAttribute("vertexPosition_modelspace"),                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
 		GL_FLOAT,           // type
 		GL_FALSE,           // normalized?
@@ -105,10 +102,10 @@ void Geometry::Render(glm::mat4 viewProjection)
 		(void*)0            // array buffer offset
 	);
 	//as texturas
-	glEnableVertexAttribArray(shader.attributes["textureCoord"]);
+	glEnableVertexAttribArray(shaderProgram->GetAttribute("textureCoord"));
     glBindBuffer(GL_ARRAY_BUFFER, textureCoordinateId);
 	glVertexAttribPointer(
-			shader.attributes["textureCoord"], // attribute
+			shaderProgram->GetAttribute("textureCoord"), // attribute
 			2,                  // number of elements per vertex, here (x,y)
 			GL_FLOAT,           // the type of each element
 			GL_FALSE,           // take our values as-is
@@ -123,6 +120,7 @@ void Geometry::Render(glm::mat4 viewProjection)
     cout<<err<<endl;
     //Renderiza
     //Limpa
+	shaderProgram->StopUsing();
 }
 
 Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
