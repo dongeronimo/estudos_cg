@@ -4,7 +4,12 @@ project(nehe_05)
 
 
 file(GLOB my_source_files "*.h" "*.cpp")
-add_executable(nehe_05 utils.h geometry.h geometry.cpp nehe05.cpp shader.h shader.cpp camera.cpp camera.h)
+add_executable(nehe_05 utils.h geometry.h geometry.cpp nehe05.cpp shader.h shader.cpp camera.cpp camera.h myObjLoader.h myObjLoader.cpp)
+
+#Adiciona o mylib
+include_directories(${MyLib_INCLUDE_DIRS})
+target_link_libraries(nehe_05 mylib)
+
 if(${WIN32})
     # Find Glut
     set (GLUT_INCLUDE_DIR "C:/lib2/freeglut/include/GL")

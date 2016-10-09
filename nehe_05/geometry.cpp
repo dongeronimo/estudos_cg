@@ -126,6 +126,9 @@ void Geometry::Render(glm::mat4 viewProjection)
 }
 
 Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId) {
+	//Carrega a textura
+
+	//Seta o shader
 	SetShader(vertexShaderId, fragmentShaderId);
 	//cria um cubo.
 	GLfloat cube_vertices[] = {

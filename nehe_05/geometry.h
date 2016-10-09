@@ -7,6 +7,8 @@
 #include <glm/detail/type_mat.hpp>
 #include <glm/detail/type_mat4x4.hpp>
 #include "shader.h"
+#include <vector>
+
 class Geometry
 {
 private:
@@ -17,8 +19,10 @@ private:
 	GLuint elementBufferId;
 	GLfloat* vertexBuffer;
 	GLuint* elementBuffer;
+
     GLfloat* textureCoordinateBuffer;
 	GLuint textureCoordinateId;
+	size_t textureBufferSize;
 	void SetShader(GLuint vertexShaderId, GLuint fragmentShaderId) ;
 public:
 	//Cria a geometria manualmente, pra experiências, pra que eu não tenha que me
