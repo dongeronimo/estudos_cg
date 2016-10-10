@@ -1,6 +1,6 @@
 #ifndef __texture_h
 #define __texture_h
-#include "libpng16/png.h"
+#include <png.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>

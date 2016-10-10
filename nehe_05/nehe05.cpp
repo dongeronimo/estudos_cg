@@ -53,9 +53,12 @@ const std::string objPath = "//home//geronimo//programacao//estudos_cg//assets//
 #endif
 void initResources()
 {	
-	testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", 0, 0);
+	
 	//Flags do opengl
 	glEnable(GL_DEPTH_TEST);
+	int imgW = 64;
+	int imgH = 64;
+	testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", &imgW, &imgH);
 	//Shader
 	myshader = CreateShaderProgram(vsPath,
 								   fsPath);

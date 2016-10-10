@@ -29,7 +29,7 @@ if(${WIN32})
     target_link_libraries(mylib ${ASSIMP_LIB})
 	# Find libpng
 	set (LIBPNG_DIR "C:/Program Files (x86)/libpng/include")
-	set (LIBPNG_LIB "C:/Program Files (x86)/libpng/lib/libpng16_staticd.lib")
+	set (LIBPNG_LIB "C:/Program Files (x86)/libpng/lib/libpng16d.lib")
 	target_include_directories(mylib PUBLIC ${LIBPNG_DIR})
 	target_link_libraries(mylib ${LIBPNG_LIB})
 endif(${WIN32})
