@@ -28,11 +28,14 @@
 #include <memory>
 #include <cstring>
 #include "camera.h"
+#include <Texture.h>
 
 using namespace std;
 using namespace glm;
 const GLfloat fov = 45.0f;
 GLfloat screenWidth = 600, screenHeight = 400;
+
+GLuint testeTex;
 
 shared_ptr<Geometry> geo;
 unique_ptr<camera> cam;
@@ -50,6 +53,7 @@ const std::string objPath = "//home//geronimo//programacao//estudos_cg//assets//
 #endif
 void initResources()
 {	
+	testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", 0, 0);
 	//Flags do opengl
 	glEnable(GL_DEPTH_TEST);
 	//Shader
