@@ -16,48 +16,43 @@ namespace texture
 		FILE *fp = fopen(file_name, "rb");
 		if (fp == 0)
 		{
-			perror(file_name);
-			return 0;
+			fclose(fp);
+			throw std::runtime_error("arquivo not found " + std::string(file_name));
 		}
 		// read the header
 		fread(header, 1, 8, fp);
 		if (png_sig_cmp(header, 0, 8))
 		{
-			fprintf(stderr, "error: %s is not a PNG.\n", file_name);
 			fclose(fp);
-			return 0;
+			throw std::runtime_error("is not a png " + std::string(file_name));
 		}
 		png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
 		if (!png_ptr)
 		{
-			fprintf(stderr, "error: png_create_read_struct returned 0.\n");
 			fclose(fp);
-			return 0;
+			throw std::runtime_error("error: png_create_read_struct returned 0. " + std::string(file_name));
 		}
 		// create png info struct
 		png_infop info_ptr = png_create_info_struct(png_ptr);
 		if (!info_ptr)
 		{
-			fprintf(stderr, "error: png_create_info_struct returned 0.\n");
 			png_destroy_read_struct(&png_ptr, (png_infopp)NULL, (png_infopp)NULL);
 			fclose(fp);
-			return 0;
+			throw std::runtime_error("error: png_create_info_struct returned 0 " + std::string(file_name));
 		}
 		// create png info struct
 		png_infop end_info = png_create_info_struct(png_ptr);
 		if (!end_info)
 		{
-			fprintf(stderr, "error: png_create_info_struct returned 0.\n");
 			png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
 			fclose(fp);
-			return 0;
+			throw std::runtime_error("error: png_create_info_struct returned 0. " + std::string(file_name));
 		}
 		// the code in this if statement gets called if libpng encounters an error
 		if (setjmp(png_jmpbuf(png_ptr))) {
-			fprintf(stderr, "error from libpng\n");
 			png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
 			fclose(fp);
-			return 0;
+			throw std::runtime_error("error from libpng " + std::string(file_name));
 		}
 		// init png reading
 		png_init_io(png_ptr, fp);
@@ -76,12 +71,21 @@ namespace texture
 		//printf("%s: %lux%lu %d\n", file_name, temp_width, temp_height, color_type);
 		if (bit_depth != 8)
 		{
-			fprintf(stderr, "%s: Unsupported bit depth %d.  Must be 8.\n", file_name, bit_depth);
+			throw std::runtime_error("Unsupported bit depth %d.  Must be 8. " + std::string(file_name));
 			return 0;
 		}
 		GLint format;
 		switch (color_type)
 		{
+		case PNG_COLOR_TYPE_GRAY:
+			throw std::runtime_error("PNG_COLOR_TYPE_GRAY " + std::string(file_name));
+			break;
+		case PNG_COLOR_TYPE_GRAY_ALPHA:
+			throw std::runtime_error("PNG_COLOR_TYPE_GRAY_ALPHA " + std::string(file_name));
+			break;
+		case PNG_COLOR_TYPE_PALETTE:
+			throw std::runtime_error("PNG_COLOR_TYPE_PALETTE " + std::string(file_name));
+			break;
 		case PNG_COLOR_TYPE_RGB:
 			format = GL_RGB;
 			break;
@@ -89,7 +93,7 @@ namespace texture
 			format = GL_RGBA;
 			break;
 		default:
-			fprintf(stderr, "%s: Unknown libpng color type %d.\n", file_name, color_type);
+			throw std::runtime_error("Unknown libpng color type  " + std::string(file_name));
 			return 0;
 		}
 		// Update the png info struct.
@@ -102,10 +106,9 @@ namespace texture
 		png_byte * image_data = (png_byte *)malloc(rowbytes * temp_height * sizeof(png_byte) + 15);
 		if (image_data == NULL)
 		{
-			fprintf(stderr, "error: could not allocate memory for PNG image data\n");
 			png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
 			fclose(fp);
-			return 0;
+			throw std::runtime_error("error: could not allocate memory for PNG image data  " + std::string(file_name));
 		}
 		// row_pointers is for pointing to image_data for reading the png with libpng
 		png_byte ** row_pointers = (png_byte **)malloc(temp_height * sizeof(png_byte *));
