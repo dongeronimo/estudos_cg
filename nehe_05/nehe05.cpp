@@ -53,21 +53,26 @@ const std::string objPath = "//home//geronimo//programacao//estudos_cg//assets//
 #endif
 void initResources()
 {	
-	
-	//Flags do opengl
-	glEnable(GL_DEPTH_TEST);
-	int imgW = 64;
-	int imgH = 64;
-	testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", &imgW, &imgH);
-	//Shader
-	myshader = CreateShaderProgram(vsPath,
-								   fsPath);
-//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
-	geo = make_shared<Geometry>(myshader.vsId, myshader.fsId);
-    cam = std::make_unique<camera>();
-    cam->setEyePosition(0, 10, -10);
-	cam->setFocusPosition(0,0,0);
-	cam->setViewUp(0,1,0);
+	try
+	{
+		//Flags do opengl
+		glEnable(GL_DEPTH_TEST);
+		int imgW = 64;
+		int imgH = 64;
+		testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", &imgW, &imgH);
+		//Shader
+		myshader = CreateShaderProgram(vsPath, fsPath);
+		//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
+		geo = make_shared<Geometry>(myshader.vsId, myshader.fsId);
+		cam = std::make_unique<camera>();
+		cam->setEyePosition(0, 10, -10);
+		cam->setFocusPosition(0,0,0);
+		cam->setViewUp(0,1,0);
+	}
+	catch(std::runtime_error& err)
+	{
+		std::cout << err.what();
+	}
 }
 
 void idle()
