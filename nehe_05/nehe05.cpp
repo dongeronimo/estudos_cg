@@ -29,18 +29,21 @@
 #include <cstring>
 #include "camera.h"
 #include <Texture.h>
+#include <Geometry.h>
 
 using namespace std;
 using namespace glm;
 const GLfloat fov = 45.0f;
 GLfloat screenWidth = 600, screenHeight = 400;
-
+//id da textura de teste, solto no escopo global no momento.
 GLuint testeTex;
 
-shared_ptr<Geometry> geo;
+//shared_ptr<Geometry> geo;
 unique_ptr<camera> cam;
 
 MyShader myshader;
+
+shared_ptr<geometry::Geometry> geo;
 #ifdef WIN32
 const std::string vsPath = "C:\\programacao\\comp_grafica\\src\\nehe_05\\vertexShader.vertexshader";
 const std::string fsPath = "C:\\programacao\\comp_grafica\\src\\nehe_05\\fragmentShader.fragmentshader";
@@ -63,7 +66,7 @@ void initResources()
 		//Shader
 		myshader = CreateShaderProgram(vsPath, fsPath);
 		//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
-		geo = make_shared<Geometry>(myshader.vsId, myshader.fsId);
+		geo = make_shared<geometry:: Geometry>(myshader.vsId, myshader.fsId);
 		cam = std::make_unique<camera>();
 		cam->setEyePosition(0, 10, -10);
 		cam->setFocusPosition(0,0,0);
@@ -109,6 +112,9 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0f, 0.2f, 0.2f, 1.0f);
+
+	//renderiza
+	geo->textureId = testeTex;
     geo->Render(cam->getViewProjectionMatrix());
 	glFlush();
 	glutSwapBuffers();

@@ -1,5 +1,5 @@
-#ifndef __geometry_h
-#define __geometry_h
+#ifndef __geometry__old_h
+#define __geometry__old_h
 #include <string>
 #include <glew.h>
 //#include <gl.h>
