@@ -38,7 +38,7 @@ if(${UNIX})
 else(${UNIX})
     # Find Glut
     set (GLUT_INCLUDE_DIR "C:/Program Files/freeglut/include/GL")
-    set (GLUT_LIB "C:/Program Files/freeglut/lib/freeglut_static.lib")
+    set (GLUT_LIB "C:/Program Files/freeglut/lib/freeglutd.lib")
     target_include_directories(mylib PUBLIC ${GLUT_INCLUDE_DIR})
     target_link_libraries(mylib ${GLUT_LIB} )
     # Find GLEW
@@ -51,7 +51,7 @@ else(${UNIX})
     target_include_directories(mylib PUBLIC ${GLM_INCLUDE_DIR})
     # Find Assim
     set (ASSIMP_DIR "C:/Program Files/Assimp/include")
-    set (ASSIMP_LIB "C:/Program Files/Assimp/lib/assimp-vc140-mt.lib")
+    set (ASSIMP_LIB "C:/Program Files/Assimp/lib/assimp-vc120-mt.lib")
     target_include_directories(mylib PUBLIC ${ASSIMP_DIR})
     target_link_libraries(mylib ${ASSIMP_LIB})
 	# Find libpng

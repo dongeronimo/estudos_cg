@@ -8,26 +8,7 @@ add_executable(nehe_05 utils.h geometry.h geometry.cpp nehe05.cpp shader.h shade
 include_directories(nehe_05 PUBLIC ${MyLib_INCLUDE_DIRS})
 target_link_libraries(nehe_05 mylib)
 
-if(${WIN32})
-    # Find Glut
-    set (GLUT_INCLUDE_DIR "C:/lib2/freeglut/include/GL")
-    set (GLUT_LIB "C:/lib2/freeglut/lib/freeglut.lib")
-    target_include_directories(nehe_05 PUBLIC ${GLUT_INCLUDE_DIR})
-    target_link_libraries(nehe_05 ${GLUT_LIB} )
-    # Find GLEW
-    set (GLEW_INCLUDE_DIR "C:/lib2/glew-2.0.0/include/GL")
-    set (GLEW_LIB "C:/lib2/glew-2.0.0/lib/Release/Win32/glew32.lib")
-    target_include_directories(nehe_05 PUBLIC ${GLEW_INCLUDE_DIR})
-    target_link_libraries(nehe_05 ${GLEW_LIB} )
-    # Find GLM
-    set(GLM_INCLUDE_DIR "C:/libs/glm-0.9.7.1")
-    target_include_directories(nehe_05 PUBLIC ${GLM_INCLUDE_DIR})
-    # Find Assim
-    set (ASSIMP_DIR "C:/Program Files (x86)/Assimp/include")
-    set (ASSIMP_LIB "C:/Program Files (x86)/Assimp/lib/assimp-vc140-mt.lib")
-    target_include_directories(nehe_05 PUBLIC ${ASSIMP_DIR})
-    target_link_libraries(nehe_05 ${ASSIMP_LIB})
-endif(${WIN32})
+
 if(${UNIX})
     # Find OpenGL
     find_package(OpenGL REQUIRED)
@@ -47,6 +28,25 @@ if(${UNIX})
     # Find Assim
     set (ASSIMP_DIR "/home/geronimo/programacao/assimp-master/include")
     set (ASSIMP_LIB "/home/geronimo/programacao/assimp-master/lib/libassimp.so")
+    target_include_directories(nehe_05 PUBLIC ${ASSIMP_DIR})
+    target_link_libraries(nehe_05 ${ASSIMP_LIB})
+else(${UNIX})
+    # Find Glut
+    set (GLUT_INCLUDE_DIR "C:/Program Files/freeglut/include/GL")
+    set (GLUT_LIB "C:/Program Files/freeglut/lib/freeglutd.lib")
+    target_include_directories(nehe_05 PUBLIC ${GLUT_INCLUDE_DIR})
+    target_link_libraries(nehe_05 ${GLUT_LIB} )
+    # Find GLEW
+    set (GLEW_INCLUDE_DIR "C:/lib2/glew-2.0.0/include/GL")
+    set (GLEW_LIB "C:/lib2/glew-2.0.0/lib/Release/x64/glew32.lib")
+    target_include_directories(nehe_05 PUBLIC ${GLEW_INCLUDE_DIR})
+    target_link_libraries(nehe_05 ${GLEW_LIB} )
+    # Find GLM
+    set(GLM_INCLUDE_DIR "C:/libs/glm-0.9.7.1")
+    target_include_directories(nehe_05 PUBLIC ${GLM_INCLUDE_DIR})
+    # Find Assim
+    set (ASSIMP_DIR "C:/Program Files/Assimp/include")
+    set (ASSIMP_LIB "C:/Program Files/Assimp/lib/assimp-vc120-mt.lib")
     target_include_directories(nehe_05 PUBLIC ${ASSIMP_DIR})
     target_link_libraries(nehe_05 ${ASSIMP_LIB})
 endif(${UNIX})
