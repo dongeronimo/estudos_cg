@@ -15,6 +15,15 @@
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/nehe02.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_02/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Shader.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Geometry.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Utils.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Geometry.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Texture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Texture.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Utils.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mylib/Shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/camera.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_04b/utils.h" isTestSource="false" />
@@ -29,6 +38,8 @@
       <sourceFolder url="file://$MODULE_DIR$/nehe_05/camera.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_05/utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_05/geometry.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/myObjLoader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/nehe_05/myObjLoader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_05/nehe05.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_05/geometry.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/nehe_05/CMakeLists.txt" isTestSource="false" />
@@ -46,11 +57,13 @@
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
           <root url="file://C:/cygwin64/usr/include" />
+          <root url="file://C:/Program Files (x86)/libpng/include" />
         </CLASSES>
         <SOURCES>
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include" />
           <root url="file://C:/cygwin64/lib/gcc/x86_64-pc-cygwin/4.9.3/include-fixed" />
           <root url="file://C:/cygwin64/usr/include" />
+          <root url="file://C:/Program Files (x86)/libpng/include" />
         </SOURCES>
       </library>
     </orderEntry>

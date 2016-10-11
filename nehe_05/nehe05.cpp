@@ -68,7 +68,7 @@ void initResources()
 		//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
 		geo = make_shared<geometry:: Geometry>(myshader.vsId, myshader.fsId);
 		cam = std::make_unique<camera>();
-		cam->setEyePosition(0, 10, -10);
+		cam->setEyePosition(0, 22, 10);
 		cam->setFocusPosition(0,0,0);
 		cam->setViewUp(0,1,0);
 	}
