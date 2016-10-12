@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 project(nehe_05)
 
-add_executable(nehe_05 utils.h geometry.h geometry.cpp nehe05.cpp shader.h shader.cpp camera.cpp camera.h myObjLoader.h myObjLoader.cpp)
+add_executable(nehe_05 utils.h geometry.h geometry.cpp nehe05.cpp shader.h shader.cpp myObjLoader.h myObjLoader.cpp)
 
 #Adiciona o mylib
 include_directories(nehe_05 PUBLIC ${MyLib_INCLUDE_DIRS})

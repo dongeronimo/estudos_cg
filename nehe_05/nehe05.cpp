@@ -21,16 +21,14 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "shader.h"
-#include "geometry.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
 #include <cstring>
-#include "Camera.h"
 #include <Texture.h>
 #include <Geometry.h>
 #include <Utils.h>
+#include <camera.h>
 
 using namespace std;
 using namespace glm;
@@ -42,7 +40,7 @@ GLuint testeTex;
 //shared_ptr<Geometry> geo;
 unique_ptr<Camera> cam;
 
-//MyShader myshader;
+GLuint vsId, fsId;
 
 shared_ptr<geometry::Geometry> geo;
 #ifdef WIN32
@@ -61,16 +59,11 @@ void initResources()
 	{
 		//Flags do opengl
 		glEnable(GL_DEPTH_TEST);
-		int imgW = 64;
-		int imgH = 64;
-		testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", &imgW, &imgH);
+		testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", 0, 0);
 		//Shader
-		//myshader = CreateShaderProgram(vsPath, fsPath);
-
-		//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
-		//geo = make_shared<geometry:: Geometry>(myshader.vsId, myshader.fsId);
-		geo = make_shared<geometry::Geometry>(shader::Shader::MakeShader(GL_VERTEX_SHADER, ReadTextFile(vsPath)),
-			shader::Shader::MakeShader(GL_FRAGMENT_SHADER, ReadTextFile(fsPath)));
+		vsId = shader::Shader::MakeShader(GL_VERTEX_SHADER, ReadTextFile(vsPath));
+		fsId = shader::Shader::MakeShader(GL_FRAGMENT_SHADER, ReadTextFile(fsPath));
+		geo = make_shared<geometry::Geometry>(vsId, fsId);
 		cam = std::make_unique<Camera>();
 		cam->setEyePosition(1, 7, 5);
 		cam->setFocusPosition(0,0,0);
@@ -88,7 +81,7 @@ void onTimer(int value)
 }
 void idle()
 {
-//	glutPostRedisplay();
+	glutPostRedisplay();
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -111,7 +104,6 @@ void keyboard(unsigned char key, int x, int y)
 
 void reshape(int w, int h)
 {
-	//A matrix de proje��o depende da largura e altura da tela.
 	screenWidth = static_cast<GLfloat>(w);
 	screenHeight = static_cast<GLfloat>(h);
 }
