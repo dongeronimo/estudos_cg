@@ -97,7 +97,7 @@ void reshape(int w, int h)
 	screenWidth = w;
 	screenHeight = h;
 }
-
+long t = 0;
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -141,7 +141,8 @@ void display(void)
 	//GLenum err = glGetError();
 
 	glDisableVertexAttribArray(0);
-
+	t++;
+	cout << t << endl;
 	glFlush();
 	glutSwapBuffers();
 }
