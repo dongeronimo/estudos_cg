@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by geronimo on 03/10/16.
 //
 
@@ -11,13 +11,13 @@
  * Uma câmera é responsável pela matriz de projeção e de visão (look-at).
  * Ela provê meios de mudar o look at da câmera e suas propriedades de
  * projeção.*/
-class camera {
+class Camera {
 private:
     glm::vec3 eyePosition, focusPosition, upVector;
     glm::mat4 projection;
     glm::mat4 view;
 public:
-    camera();
+    Camera();
     void setEyePosition(float x, float y, float z);
     glm::vec3 getEyePosition();
     void setFocusPosition(float x, float y, float z);

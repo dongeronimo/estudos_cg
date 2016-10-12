@@ -5,4 +5,6 @@
 
 //Lê um arquivo e o retorna como texto.
 std::string ReadTextFile(std::string path);
+//Inicializa a GLEW
+void StartGlew();
 #endif

@@ -1,4 +1,4 @@
-#include <glew.h>
+﻿#include <glew.h>
 #include <glut.h>
 #include <string>
 #include <iostream>
@@ -10,14 +10,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
 #include <cstring>
-#include "camera.h"
+#include "Camera.h"
 using namespace std;
 using namespace glm;
 const GLfloat fov = 45.0f;
 GLfloat screenWidth = 600, screenHeight = 400;
 
 shared_ptr<Geometry> geo;
-unique_ptr<camera> cam;
+unique_ptr<Camera> cam;
 struct Triangulo
 {
 	GLfloat* vertexBufferData;
@@ -50,7 +50,7 @@ void initResources()
 	myshader = CreateShaderProgram(vsPath, fsPath);
 	geo = make_shared<Geometry>(objPath,
 								myshader.vsId, myshader.fsId);
-    cam = std::make_unique<camera>();
+    cam = std::make_unique<Camera>();
     cam->setEyePosition(0, 10, -10);
 	cam->setFocusPosition(0,0,0);
 	cam->setViewUp(0,1,0);

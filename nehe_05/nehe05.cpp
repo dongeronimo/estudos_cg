@@ -1,4 +1,4 @@
-//////Textos de apoio:
+﻿//////Textos de apoio:
 //http://www.opengl-tutorial.org/beginners-tutorials/tutorial-5-a-textured-cube/
 //http://www.tomdalling.com/blog/modern-opengl/02-textures/
 //http://www.tomdalling.com/blog/modern-opengl/03-matrices-depth-buffering-animation/
@@ -27,7 +27,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <memory>
 #include <cstring>
-#include "camera.h"
+#include "Camera.h"
 #include <Texture.h>
 #include <Geometry.h>
 
@@ -39,7 +39,7 @@ GLfloat screenWidth = 600, screenHeight = 400;
 GLuint testeTex;
 
 //shared_ptr<Geometry> geo;
-unique_ptr<camera> cam;
+unique_ptr<Camera> cam;
 
 MyShader myshader;
 
@@ -67,8 +67,8 @@ void initResources()
 		myshader = CreateShaderProgram(vsPath, fsPath);
 		//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
 		geo = make_shared<geometry:: Geometry>(myshader.vsId, myshader.fsId);
-		cam = std::make_unique<camera>();
-		cam->setEyePosition(0, 22, 10);
+		cam = std::make_unique<Camera>();
+		cam->setEyePosition(1, 7, 5);
 		cam->setFocusPosition(0,0,0);
 		cam->setViewUp(0,1,0);
 	}
@@ -77,10 +77,14 @@ void initResources()
 		std::cout << err.what();
 	}
 }
-
+void onTimer(int value)
+{
+	std::cout << __FUNCTION__ << std::endl;
+	glutPostRedisplay();
+}
 void idle()
 {
-	glutPostRedisplay();
+//	glutPostRedisplay();
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -107,7 +111,7 @@ void reshape(int w, int h)
 	screenWidth = static_cast<GLfloat>(w);
 	screenHeight = static_cast<GLfloat>(h);
 }
-
+static int contador = 0;
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -116,8 +120,11 @@ void display(void)
 	//renderiza
 	geo->textureId = testeTex;
     geo->Render(cam->getViewProjectionMatrix());
+	contador++;
+	std::cout << contador << std::endl;
 	glFlush();
 	glutSwapBuffers();
+	glutPostRedisplay();
 }
 
 //Fun��o principal do programa.

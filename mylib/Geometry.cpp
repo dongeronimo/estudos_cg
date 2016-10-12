@@ -10,10 +10,15 @@ geometry::Geometry::Geometry(GLuint vertexShaderId, GLuint fragmentShaderId)
 	//Cria a geometria.
 	//Vertex Coords/Texture Coords
 	GLfloat vertexData[]={
-		0,0,0,0,0,
-		0,1,0,0,1,  
-		1,0,0,1,0,  
-		1,1,0,1,1,
+		0,0,0,
+		0,1,0,  
+		1,0,0,  
+		1,1,0,
+
+		0,0,
+		0,1,
+		1,0,
+		1,1,
 	};
 	//Dois triangulos = 1 face
 	GLuint elementData[]={
@@ -66,7 +71,7 @@ void geometry::Geometry::Render(glm::mat4 viewProjectionMatrix)
 		3,
 		GL_FLOAT,
 		GL_FALSE,
-		sizeof(GLfloat)*2,
+		0,
 		(void*)0
 	);
 	//2)Tex coords textureCoord
@@ -77,8 +82,8 @@ void geometry::Geometry::Render(glm::mat4 viewProjectionMatrix)
 			2,
 			GL_FLOAT,
 			GL_FALSE,
-			sizeof(GLfloat)*3,
-			(void*)0/*(void*)(sizeof(GLfloat) * 3)*/ /*4 Vértices de 3 elementos*/
+			0,
+			(void*)(sizeof(GLfloat) * 12) /*4 Vértices de 3 elementos*/
 	);
 	//3)Elementos
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementBufferId);
