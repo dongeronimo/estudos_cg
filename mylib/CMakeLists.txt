@@ -36,6 +36,7 @@ if(${UNIX})
 	target_include_directories(mylib PUBLIC ${LIBPNG_DIR})
 	target_link_libraries(mylib ${LIBPNG_LIB})
 else(${UNIX})
+	find_package(OpenGL REQUIRED)
     # Find Glut
     set (GLUT_INCLUDE_DIR "C:/Program Files/freeglut/include/GL")
     set (GLUT_LIB "C:/Program Files/freeglut/lib/freeglutd.lib")
@@ -59,6 +60,12 @@ else(${UNIX})
 	set (LIBPNG_LIB "C:/Program Files/libpng/lib/libpng16d.lib")
 	target_include_directories(mylib PUBLIC ${LIBPNG_DIR})
 	target_link_libraries(mylib ${LIBPNG_LIB})
+
+		# Find GLFW - Não vou usar glut
+	set (GLFW_INCLUDE_DIR "C:/Program Files/GLFW/include/GLFW")
+	set (GLFW_LIB "C:/Program Files/GLFW/lib/glfw3.lib")
+	target_include_directories(mylib PUBLIC ${GLFW_INCLUDE_DIR})
+    target_link_libraries(mylib ${GLFW_LIB} )
 endif(${UNIX})
 
 

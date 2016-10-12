@@ -8,7 +8,7 @@
 void Camera::SetScreenSize(int w, int h)
 {
 	if (h == 0)
-		h == 1;
+		h = 1;
 	projection = glm::perspective<GLfloat>(45, w/h, 0.1f, 100.f);
 }
 Camera::Camera() {

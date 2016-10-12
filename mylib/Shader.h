@@ -14,13 +14,14 @@ namespace shader {
 		GLuint fragmentShaderId;
 		//Gera a lista de atributos e uniformes pro programa.
 		void Introspect();
-		//Criador interno de shader a partir de um código fonte.
-		GLuint MakeShader(GLenum type, std::string source);
 		//Log do shader
-		std::string GetShaderInfoLog(GLuint object, PFNGLGETSHADERIVPROC glGet__iv, PFNGLGETSHADERINFOLOGPROC glGet__InfoLog);
+		static std::string GetShaderInfoLog(GLuint object, PFNGLGETSHADERIVPROC glGet__iv, PFNGLGETSHADERINFOLOGPROC glGet__InfoLog);
 		//Linka as partes e cria o programa completo
 		GLuint MakeProgram(GLuint vertex_shader, GLuint fragment_shader);
 	public:
+		//Criador interno de shader a partir de um código fonte.
+		static GLuint MakeShader(GLenum type, std::string source);
+
 		GLuint GetUniform(std::string nome);
 		GLuint GetAttribute(std::string nome);
 		//Cria um shader a partir do código fonte dado.
