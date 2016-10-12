@@ -30,6 +30,7 @@
 #include "Camera.h"
 #include <Texture.h>
 #include <Geometry.h>
+#include <Utils.h>
 
 using namespace std;
 using namespace glm;
@@ -41,7 +42,7 @@ GLuint testeTex;
 //shared_ptr<Geometry> geo;
 unique_ptr<Camera> cam;
 
-MyShader myshader;
+//MyShader myshader;
 
 shared_ptr<geometry::Geometry> geo;
 #ifdef WIN32
@@ -64,9 +65,12 @@ void initResources()
 		int imgH = 64;
 		testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", &imgW, &imgH);
 		//Shader
-		myshader = CreateShaderProgram(vsPath, fsPath);
+		//myshader = CreateShaderProgram(vsPath, fsPath);
+
 		//	geo = make_shared<Geometry>(objPath, myshader.vsId, myshader.fsId);
-		geo = make_shared<geometry:: Geometry>(myshader.vsId, myshader.fsId);
+		//geo = make_shared<geometry:: Geometry>(myshader.vsId, myshader.fsId);
+		geo = make_shared<geometry::Geometry>(shader::Shader::MakeShader(GL_VERTEX_SHADER, ReadTextFile(vsPath)),
+			shader::Shader::MakeShader(GL_FRAGMENT_SHADER, ReadTextFile(fsPath)));
 		cam = std::make_unique<Camera>();
 		cam->setEyePosition(1, 7, 5);
 		cam->setFocusPosition(0,0,0);
