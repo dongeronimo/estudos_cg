@@ -86,7 +86,7 @@ void reshape(int w, int h)
 	screenWidth = w;
 	screenHeight = h;
 }
-
+long t = 0;
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -127,7 +127,8 @@ void display(void)
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 	glDisableVertexAttribArray(0);
-
+	cout << t << endl;
+	t++;
 	glFlush();
 	glutSwapBuffers();
 }
