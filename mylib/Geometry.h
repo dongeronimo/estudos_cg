@@ -12,6 +12,7 @@ namespace geometry
 	class Geometry
 	{
 	private:
+		int quantidadeDeFaces;
 		std::unique_ptr<shader::Shader> shaderProgram;
 		GLuint vertexArrayId, vertexBufferId, elementBufferId;
 	public:

@@ -63,9 +63,9 @@ void initResources()
 		//Shader
 		vsId = shader::Shader::MakeShader(GL_VERTEX_SHADER, ReadTextFile(vsPath));
 		fsId = shader::Shader::MakeShader(GL_FRAGMENT_SHADER, ReadTextFile(fsPath));
-		geo = make_shared<geometry::Geometry>(vsId, fsId);
+		geo = make_shared<geometry::Geometry>(objPath, vsId, fsId);
 		cam = std::make_unique<Camera>();
-		cam->setEyePosition(1, 7, 5);
+		cam->setEyePosition(1, 7, 50);
 		cam->setFocusPosition(0,0,0);
 		cam->setViewUp(0,1,0);
 	}
@@ -91,12 +91,14 @@ void keyboard(unsigned char key, int x, int y)
 	if(key == 'a')
 	{
 		glm::vec3 p = cam->getFocusPosition();
+		p[0] = p[0] + 1;
 		p[2] = p[2]+1;
 		cam->setFocusPosition(p[0], p[1], p[2]);
 	}
 	if(key == 'd')
 	{
 		glm::vec3 p = cam->getFocusPosition();
+		p[0] = p[0] - 1;
 		p[2] = p[2]-1;
 		cam->setFocusPosition(p[0], p[1], p[2]);
 	}
@@ -137,7 +139,7 @@ int main(int argc, char *argv[])
 	{
 		const GLubyte* _err = glewGetErrorString(glError);
 		std::string str((char*)_err);
-		std::cerr << "Erro na inicializa��o da GLEW:" << str << std::endl;
+		std::cerr << "Erro na inicializacao da GLEW:" << str << std::endl;
 		return EXIT_FAILURE;
 	}
 	initResources();
