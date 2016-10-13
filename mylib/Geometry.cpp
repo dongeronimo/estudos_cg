@@ -45,7 +45,7 @@ geometry::Geometry::Geometry(std::string filepath, GLuint vertexShaderId, GLuint
 	shaderProgram = std::make_unique<shader::Shader>(vertexShaderId, fragmentShaderId);
 	//Carrega a geometria
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(filepath, aiProcess_JoinIdenticalVertices);
+	const aiScene* scene = importer.ReadFile(filepath, 0);//aiProcess_JoinIdenticalVertices | aiProcess_Triangulate);
 	const aiMesh* mesh = scene->mMeshes[0];
 	//os vértices
 	const int qtdDeVerts = mesh->mNumVertices;
@@ -79,7 +79,7 @@ geometry::Geometry::Geometry(std::string filepath, GLuint vertexShaderId, GLuint
 	//Junta as texturas e os vértices em um unico buffer
 	GLfloat *vertexBuffer = new GLfloat[qtdDeVerts * 3 + qtdDeVerts * 2];
 	memcpy(vertexBuffer, tempVertexBuffer, qtdDeVerts * 3 * sizeof(GLfloat));
-	memcpy(vertexBuffer + qtdDeVerts * 3 * sizeof(GLfloat), tempTextureBuffer, qtdDeVerts * 2 * sizeof(GLfloat));
+	memcpy(vertexBuffer + (qtdDeVerts * 3 * sizeof(GLfloat)), tempTextureBuffer, qtdDeVerts * 2 * sizeof(GLfloat));
 	delete[] tempVertexBuffer;
 	delete[] tempTextureBuffer;
 	//agora cria as coisas do opengl
@@ -94,7 +94,7 @@ geometry::Geometry::Geometry(std::string filepath, GLuint vertexShaderId, GLuint
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, qtdDeFaces * sizeof(GLuint) * 3, elementBuffer, GL_STATIC_DRAW);
 	//agora os vertexes e texCoords. 
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId);
-	glBufferData(GL_ARRAY_BUFFER, qtdDeVerts * 3 + qtdDeVerts * 2 * sizeof(GLfloat), const_cast<GLfloat*>(vertexBuffer), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, (qtdDeVerts * 3 + qtdDeVerts * 2) * sizeof(GLfloat), const_cast<GLfloat*>(vertexBuffer), GL_STATIC_DRAW);
 	//Não preciso mais dele.
 	delete[]vertexBuffer;
 }

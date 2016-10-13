@@ -46,7 +46,7 @@ shared_ptr<geometry::Geometry> geo;
 #ifdef WIN32
 const std::string vsPath = "C:\\programacao\\comp_grafica\\src\\nehe_05\\vertexShader.vertexshader";
 const std::string fsPath = "C:\\programacao\\comp_grafica\\src\\nehe_05\\fragmentShader.fragmentshader";
-const std::string objPath = "C:\\programacao\\comp_grafica\\src\\assets\\cubinho.obj";
+const std::string objPath = "C:\\programacao\\comp_grafica\\src\\assets\\outro_cu.obj";
 #endif
 #ifdef UNIX
 const std::string vsPath = "//home//geronimo//programacao//estudos_cg//nehe_04b//vertexShader.vertexshader";
@@ -59,13 +59,13 @@ void initResources()
 	{
 		//Flags do opengl
 		glEnable(GL_DEPTH_TEST);
-		testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//t1.png", 0, 0);
+		testeTex = texture::png_texture_load("C://programacao//comp_grafica//src//assets//tex01.png", 0, 0);
 		//Shader
 		vsId = shader::Shader::MakeShader(GL_VERTEX_SHADER, ReadTextFile(vsPath));
 		fsId = shader::Shader::MakeShader(GL_FRAGMENT_SHADER, ReadTextFile(fsPath));
 		geo = make_shared<geometry::Geometry>(objPath, vsId, fsId);
 		cam = std::make_unique<Camera>();
-		cam->setEyePosition(1, 7, 50);
+		cam->setEyePosition(0, 0, -2);
 		cam->setFocusPosition(0,0,0);
 		cam->setViewUp(0,1,0);
 	}
@@ -91,15 +91,15 @@ void keyboard(unsigned char key, int x, int y)
 	if(key == 'a')
 	{
 		glm::vec3 p = cam->getFocusPosition();
-		p[0] = p[0] + 1;
-		p[2] = p[2]+1;
+		//p[0] = p[0] + 1;
+		p[1] = p[1]+1;
 		cam->setFocusPosition(p[0], p[1], p[2]);
 	}
 	if(key == 'd')
 	{
 		glm::vec3 p = cam->getFocusPosition();
-		p[0] = p[0] - 1;
-		p[2] = p[2]-1;
+		//p[0] = p[0] - 1;
+		p[1] = p[1]-1;
 		cam->setFocusPosition(p[0], p[1], p[2]);
 	}
 }
